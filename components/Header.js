@@ -1,40 +1,76 @@
-import { React } from "react";
+import { React, useContext, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {logo,product01} from "../src/assests"
+import { logo } from "../src/assests";
 import {
   FaShoppingCart,
   FaRegHeart,
   FaWindowClose,
   FaArrowCircleRight,
 } from "react-icons/fa";
+import axios from "axios";
+import { CartContext } from "@/Context/CartContext";
 
 const Header = () => {
-  // const [selectCategory, setselectCategory] = useState("");
-  // const [isOpen, setIsOpen] = useState(false);
+  const { cartProducts ,setCartProducts} = useContext(CartContext);
+  const [uniqueProductCount, setUniqueProductCount] = useState(0);
 
-  // const ref = useRef();
 
-  // const categories = Array.from(
-  //   new Set(productData.map((item) => item.category))
-  // );
+  const [isOpen, setIsOpen] = useState(false);
 
-  // const toggleDropdown = () => {
-  //   setIsOpen(!isOpen);
-  // };
+  const ref = useRef();
 
-  // const handleClickOutside = (event) => {
-  //   if (ref.current && !ref.current.contains(event.target)) {
-  //     setIsOpen(false);
-  //   }
-  // };
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    if (cartProducts.length > 0) {
+      axios.post("/api/cart", { ids: cartProducts }).then((Response) => {
+        setProducts(Response.data);
+      });
+    }
+  }, [cartProducts]);
 
-  // useEffect(() => {
-  //   window.addEventListener("click", handleClickOutside);
-  //   return () => {
-  //     window.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, []);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+  const handleViewCartClick = () => {
+    setIsOpen(false);
+  };
+  const handleCheckout = () => {
+    setIsOpen(false);
+  };
+
+  const handleClickOutside = (event) => {
+    if (event.target.closest(".dropdown") === null) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  let total = 0;
+  for (const id of cartProducts) {
+    const price = products.find((p) => p.id === id)?.price || 0;
+    total += price;
+  }
+  useEffect(() => {
+    const uniqueid = new Set(cartProducts.map((product) => product.id));
+    const count = uniqueid.size;
+    setUniqueProductCount(count);
+
+  }, [cartProducts]);
+
+  const addToCart = (product) => {
+    setCartProducts((prevCartProducts) => [...prevCartProducts, product]);
+  };
+
+// const uniqueid = new Set(products.map((product) => product.id));
+//   const uniqueProductCount = uniqueid.size;
+
   return (
     <>
       <div className="header">
@@ -43,7 +79,7 @@ const Header = () => {
             <div className="col-md-3">
               <div className="header-logo">
                 <Link href="/">
-                  <Image src={logo} alt="" height={70} width={169}/>
+                  <Image src={logo} alt="" height={70} width={169} />
                 </Link>
               </div>
             </div>
@@ -74,62 +110,82 @@ const Header = () => {
                   </a>
                 </div>
 
-                <div className="dropdown">
+                <div className="dropdown" ref={ref}>
                   <a
                     className="dropdown-toggle"
                     data-toggle="dropdown"
                     aria-expanded="true"
-                    // onClick={toggleDropdown}
+                    onClick={toggleDropdown}
                   >
                     <i>
                       <FaShoppingCart />
                     </i>
                     <span>Your Cart</span>
-                    <div className="qty">2</div>
+                    <div className="qty">{uniqueProductCount}</div>
                   </a>
-                  {/* {isOpen && ( */}
-                  <div className="cart_dropdown">
-                    <div className="cart_list">
-                      <div className="product_widget">
-                        <div className="cut_button">
-                          <button
-                            className="delete"
-                            // onClick={() => handleDeleteItem(item.id)}
-                          >
-                            <i>
-                              <FaWindowClose />
-                            </i>
-                          </button>
+                  {isOpen && (
+                    <div className="cart_dropdown">
+                      {cartProducts.length === 0 ? (
+                        <h2>Your Cart is Empty!</h2>
+                      ) : (
+                        <div className="cart_list">
+                          {products.map((product) => (
+                            <div className="product_widget" key={product.id}>
+                              <div className="cut_button">
+                                <button
+                                  className="delete"
+                                  onClick={() => deleteFromCart(product.id)}
+                                >
+                                  <i>
+                                    <FaWindowClose />
+                                  </i>
+                                </button>
+                              </div>
+                              <div className="product_img">
+                                <Image
+                                  src={product.image}
+                                  alt={product.title}
+                                  width={30}
+                                  height={30}
+                                />
+                              </div>
+                              <div className="product_body">
+                                <h3 className="product_name">
+                                  {product.title}
+                                </h3>
+                                <h4 className="product_price">
+                                  <span className="qnty">
+                                    {
+                                      cartProducts.filter(
+                                        (id) => id === product.id
+                                      ).length
+                                    }
+                                  </span>
+                                  {product.price}
+                                </h4>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                        <div className="product_img">
-                          <img src={product01} alt="" />
-                        </div>
-                        <div className="product_body">
-                          <h3 className="product_name">
-                            <a href="#">lap</a>
-                          </h3>
-                          <h4 className="product_price">
-                            <span className="qnty">2x</span>$ 2oo
-                          </h4>
-                        </div>
+                      )}
+                      <hr />
+                      <div className="cart-summary">
+                        <small>{cartProducts.length} Item(s) selected</small>
+                        <h5>SUBTOTAL: ${total}</h5>
+                      </div>
+                      <div className="cart_btns">
+                        <Link href="/cartdetail" onClick={handleViewCartClick}>
+                          View Cart
+                        </Link>
+                        <Link href="/checkout" onClick={handleCheckout}>
+                          Checkout
+                          <i>
+                            <FaArrowCircleRight />
+                          </i>
+                        </Link>
                       </div>
                     </div>
-                    <hr />
-                    <div className="cart-summary">
-                      <small> Item(s) selected</small>
-                      <h5>SUBTOTAL: $300</h5>
-                    </div>
-                    <div className="cart_btns">
-                      <a href="#">View Cart</a>
-                      <a href="#">
-                        Checkout
-                        <i>
-                          <FaArrowCircleRight />
-                        </i>
-                      </a>
-                    </div>
-                  </div>
-                  {/* )} */}
+                  )}
                 </div>
 
                 <div className="menu-toggle">

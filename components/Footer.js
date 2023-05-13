@@ -12,6 +12,13 @@ import {
 } from "react-icons/fa";
 import { email, phoneNumber, location } from "../src/assests";
 import Link from "next/link";
+
+const phone = `tel:${phoneNumber}`;
+const mail = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(email)}`;
+
+const encodedLocation = encodeURIComponent(location);
+const place = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+
 const Footer = () => {
   return (
     <>
@@ -28,7 +35,7 @@ const Footer = () => {
                   </p>
                   <ul className="footer-links">
                     <li>
-                      <a href="#">
+                      <a href={place} target="_blank" rel="noopener noreferrer">
                         <i>
                           <FaMapMarkerAlt />
                         </i>
@@ -36,7 +43,7 @@ const Footer = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href={phone} target="_blank" rel="noopener noreferrer">
                         <i>
                           <FaPhone />
                         </i>
@@ -44,7 +51,7 @@ const Footer = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href={mail} target="_blank" rel="noopener noreferrer">
                         <i>
                           <FaEnvelope />
                         </i>
@@ -82,19 +89,19 @@ const Footer = () => {
                   <h3 className="footer-title">Information</h3>
                   <ul className="footer-links">
                     <li>
-                      <a href="#">About Us</a>
+                      <a href="/About">About Us</a>
                     </li>
                     <li>
-                      <a href="#">Contact Us</a>
+                      <a href="/Contact">Contact Us</a>
                     </li>
                     <li>
-                      <a href="#">Privacy Policy</a>
+                      <a href="/PrivacyPolicy">Privacy Policy</a>
                     </li>
                     <li>
                       <a href="#">Orders and Returns</a>
                     </li>
                     <li>
-                      <a href="#">Terms &amp; Conditions</a>
+                      <a href="/TermsConditions">Terms &amp; Conditions</a>
                     </li>
                   </ul>
                 </div>

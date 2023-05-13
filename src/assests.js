@@ -19,12 +19,20 @@ export {
 };
 export const email = "gsmahato8@gmail.com";
 export const phoneNumber = "9844101543";
-export const location = "Sanepa-2,Lalitpur";
+export const location = "Sanepa-2, Lalitpur";
 
 export const sitedetails = [
   {
-    email,
-    phoneNumber,
-    location,
+    title: "Email",
+    value: email,
+    link: `mailto:${email}`,
+  },
+  {
+    title: "Phone Number",
+    value: phoneNumber,
+  },
+  {
+    title: "Location",
+    value: location,
   },
 ];

@@ -128,8 +128,8 @@
     box-shadow: 0px 0px 0px 2px #E4E7ED;
     z-index: 99;
     right: 0;
-    opacity: 0;
-    visibility: hidden;
+    /* opacity: 0;
+    visibility: hidden; */
   }
   .dropdown-toggle{
     cursor: pointer;

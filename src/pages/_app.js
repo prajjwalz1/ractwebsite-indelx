@@ -4,6 +4,10 @@ import "@/styles/topheader.css";
 import "@/styles/navigation.css";
 import "@/styles/footer.css";
 import "@/styles/productpage.css";
+import "@/styles/cartdetail.css";
+import "@/styles/shopcategory.css";
+import "@/styles/newproduct.css";
+import { CartContextProvider } from "../Context/CartContext";
 
 import Header from "../../components/Header";
 import TopHeader from "../../components/TopHeader";
@@ -13,11 +17,13 @@ import Footer from "../../components/Footer";
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <TopHeader />
-      <Header />
-      <Navigation />
-      <Component {...pageProps} />
-      <Footer />
+      <CartContextProvider>
+        <TopHeader />
+        <Header />
+        <Navigation />
+        <Component {...pageProps} />
+        <Footer />
+      </CartContextProvider>
     </>
   );
 }
