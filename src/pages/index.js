@@ -2,6 +2,8 @@ import Head from "next/head";
 import ProductPage from "../../components/ProductPage";
 import ShopCategory from "../../components/ShopCategory";
 import NewProduct from "../../components/NewProduct";
+import ImageMagnifier from "../../components/ImageMagnifier";
+import TopSelling from "../../components/TopSelling";
 // import Store from "../../components/Store";
 // import Detail from "../../components/Detail";
 export default function Home({ products }) {
@@ -16,27 +18,15 @@ export default function Home({ products }) {
       <ShopCategory />
       {/* <Store /> */}
       {/* <Detail/> */}
-
-      <div className="new-pro">
-        <NewProduct />
-
-        <div
-          className="p-container"
-          style={{
-            display: "flex",
-          }}
-        >
-          {products.map((product) => (
-            <ProductPage key={product.id} id={product.id} product={product} />
-          ))}
-        </div>
-      </div>
+      {/* <ImageMagnifier/> */}
+      <ProductPage products={products} />
+      <TopSelling products={products} />
     </>
   );
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("https://fakestoreapi.com/products?limit=5");
+  const res = await fetch("https://fakestoreapi.com/products");
 
   const products = await res.json();
 

@@ -10,12 +10,17 @@ import "@/styles/newproduct.css";
 import "@/styles/breadcrumbs.css";
 import "@/styles/store.css";
 import "@/styles/productdetails.css";
+import "@/styles/topselling.css";
+import "@/styles/newsletter.css";
+
+
 import { CartContextProvider } from "../Context/CartContext";
 
 import Header from "../../components/Header";
 import TopHeader from "../../components/TopHeader";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
+import NewsLetter from "../../components/NewsLetter";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -25,6 +30,7 @@ export default function App({ Component, pageProps }) {
         <Header />
         <Navigation />
         <Component {...pageProps} />
+        <NewsLetter/>
         <Footer />
       </CartContextProvider>
     </>

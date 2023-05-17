@@ -1,7 +1,7 @@
-.container-p{
-    margin: 10px;
-    width: 260px;
-    height: 480px;
+.container-p {
+    display: flex;
+    gap: 20px; 
+
 
 }
 .product {
@@ -9,10 +9,10 @@
     margin: 15px 0px;
     box-shadow: 0px 0px 0px 0px #E4E7ED, 0px 0px 0px 1px #E4E7ED;
     transition: 0.2s all;
-    min-width: 260px;
-    min-height: 260px;
-    max-height: 479px;
-    
+    width: 263px;
+    /* min-width: 260px;
+    min-height: 263px;
+    max-height: 478px;    */
     }
     
     .product:hover {
@@ -197,7 +197,6 @@
     padding: 0px 30px 0px 50px;
     cursor: pointer;
     }
-    
     .product .add-to-cart .add-to-cart-btn:hover>i {
     opacity: 1;
     visibility: visible;

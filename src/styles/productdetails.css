@@ -14,7 +14,7 @@
   display: inline-flex;
   flex-wrap: wrap;
   padding: 10px;
-  border: 2px solid rgb(224, 223, 223);
+  /* border: 2px solid rgb(224, 223, 223); */
   overflow: auto;
 
 }

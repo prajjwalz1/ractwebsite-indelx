@@ -38,11 +38,16 @@ export default function ProductDetail({ product }) {
   function decreaseThisProduct(id) {
     removeProduct(id);
   }
+  const breadCrumbs=[
+    {name:"Home",url:'/'},
+    {name: `${product.title}...`,url:`/product/${product.id}`},
+
+  ]
   return (
     <>
       <div className="pd-container">
         <div className="product-detail">
-          <Breadcrumbs />
+          <Breadcrumbs breadCrumbs={breadCrumbs}/>
           <div className="container">
             <div className="row">
               <div className="pro-det-part">
@@ -84,7 +89,8 @@ export default function ProductDetail({ product }) {
                   </div>
                   <div className="main-image">
                     <div className="product-image">
-                      <ReactImageMagnify
+                      
+                      {/* <ReactImageMagnify
                         {...{
                           smallImage: {
                             alt: "Wristwatch by Ted Baker London",
@@ -97,14 +103,14 @@ export default function ProductDetail({ product }) {
                             height: 1800,
                           },
                         }}
-                      />
-                      {/* <Image
+                      /> */}
+                      <Image
                         src={mainImage}
                         alt={product.title}
                         width={450}
                         height={450}
                         className="zoomed-image"
-                      /> */}
+                      />
                     </div>
                   </div>
                 </div>

@@ -7,12 +7,6 @@ body {
     padding: 0;
     margin: 0;
   }
-  .p-container{
-    margin-left: 200px;
-    margin-right:200px ;
-    height: 560px;
-   }
-  
    h2, h3, h4, h5 {
     color: #2B2D42;
     font-weight: 700;

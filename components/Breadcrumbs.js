@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-const Breadcrumbs = () => {
+const Breadcrumbs = ({breadCrumbs}) => {
   return (
     <>
     
@@ -10,11 +10,15 @@ const Breadcrumbs = () => {
         <div className="row">
           <div className="col-md-12">
             <ul className="breadcrumb-tree">
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="#">All Categories</Link></li>
-              <li><Link href="#">Accessories</Link></li>
-              <li><Link href="#">Headphones</Link></li>
-              <li className="active">Product name goes here</li>
+              {breadCrumbs.map((breadcrumb,index)=>(
+                <li><Link href={breadcrumb.url}>{breadcrumb.name}</Link></li>
+
+              ))}
+              {/* <li><Link href="/">Home</Link></li> */}
+              {/* <li><Link href="/AllCategories">All Categories</Link></li> */}
+              {/* <li><Link href="#">Accessories</Link></li>
+              <li><Link href="#">Headphones</Link></li> */}
+              {/* <li className="active">Product name goes here</li> */}
             </ul>
           </div>
         </div>

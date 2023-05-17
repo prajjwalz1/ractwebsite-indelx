@@ -1,8 +1,8 @@
 import fetch from 'node-fetch';
 
-export default async function handle(req, res) {
+export default async function handle(req, res,) {
   try {
-    const response = await fetch('https://fakestoreapi.com/products?limit=5');
+    const response = await fetch('https://fakestoreapi.com/products');
     const products = await response.json();
     const ids = req.body.ids;
     const filteredProducts = products.filter(product => ids.includes(product.id));
