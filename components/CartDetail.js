@@ -60,7 +60,7 @@ const CartDetails = () => {
                     />
                   </div>
                   <div className="i-name">
-                    <span>{product.name}</span>
+                    <span>{product.title}</span>
                   </div>
                 </div>
                 <div className="other-detail">

@@ -12,9 +12,24 @@ import axios from "axios";
 import { CartContext } from "@/Context/CartContext";
 
 const Header = () => {
-  const { cartProducts ,setCartProducts} = useContext(CartContext);
-  const [uniqueProductCount, setUniqueProductCount] = useState(0);
+  const [categories, setCategories] = useState([]);
 
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        "https://fakestoreapi.com/products/categories"
+      );
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+  const { cartProducts, setCartProducts, deleteFromCart } =
+    useContext(CartContext);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -57,19 +72,13 @@ const Header = () => {
     const price = products.find((p) => p.id === id)?.price || 0;
     total += price;
   }
-  useEffect(() => {
-    const uniqueid = new Set(cartProducts.map((product) => product.id));
-    const count = uniqueid.size;
-    setUniqueProductCount(count);
-
-  }, [cartProducts]);
 
   const addToCart = (product) => {
     setCartProducts((prevCartProducts) => [...prevCartProducts, product]);
   };
 
-// const uniqueid = new Set(products.map((product) => product.id));
-//   const uniqueProductCount = uniqueid.size;
+  // const uniqueid = new Set(products.map((product) => product.id));
+  //   const uniqueProductCount = uniqueid.size;
 
   return (
     <>
@@ -89,8 +98,11 @@ const Header = () => {
                 <form>
                   <select className="input-select">
                     <option value="0">All Categories</option>
-                    <option value="1">Category 01</option>
-                    <option value="1">Category 02</option>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
                   </select>
                   <input className="input" placeholder="Search here" />
                   <button className="search-btn">Search</button>
@@ -101,13 +113,13 @@ const Header = () => {
             <div className="col-md-3 clearfix">
               <div className="header-ctn">
                 <div>
-                  <a href="#">
+                  <Link href="/Wishlist">
                     <i>
                       <FaRegHeart />
                     </i>
                     <span>Your Wishlist</span>
                     <div className="qty">2</div>
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="dropdown" ref={ref}>
@@ -121,7 +133,7 @@ const Header = () => {
                       <FaShoppingCart />
                     </i>
                     <span>Your Cart</span>
-                    <div className="qty">{uniqueProductCount}</div>
+                    <div className="qty">{cartProducts.length}</div>
                   </a>
                   {isOpen && (
                     <div className="cart_dropdown">

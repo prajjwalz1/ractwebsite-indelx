@@ -25,54 +25,54 @@ const TopHeader = () => {
       <div className="top-header">
         <ul className="header-links-left">
           <li>
-            <a href={phone} target="_blank" rel="noopener noreferrer">
+            <Link href={phone} target="_blank" rel="noopener noreferrer">
               <span>
                 <i>
                   <FaPhone />
                 </i>
               </span>
               {phoneNumber}
-            </a>
+            </Link>
           </li>
           <li>
-            <a href={mail} target="_blank" rel="noopener noreferrer">
+            <Link href={mail} target="_blank" rel="noopener noreferrer">
               <i>
                 <FaEnvelope />{" "}
               </i>
               {email}
-            </a>
+            </Link>
           </li>
           <li>
-            <a href={place} target="_blank" rel="noopener noreferrer">
+            <Link href={place} target="_blank" rel="noopener noreferrer">
               <span>
                 <i>
                   <FaMapMarkerAlt />
                 </i>
               </span>
               {location}
-            </a>
+            </Link>
           </li>
         </ul>
         <ul className="header-links-right">
           <li>
-            <a href="#">
+            <Link href="#">
               <span>
                 <i>
                   <FaDollarSign />
                 </i>
               </span>
               USD
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link href="#">
               <span>
                 <i>
                   <FaUser />
                 </i>
               </span>
               My Account
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

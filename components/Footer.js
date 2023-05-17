@@ -35,28 +35,28 @@ const Footer = () => {
                   </p>
                   <ul className="footer-links">
                     <li>
-                      <a href={place} target="_blank" rel="noopener noreferrer">
+                      <Link href={place} target="_blank" rel="noopener noreferrer">
                         <i>
                           <FaMapMarkerAlt />
                         </i>
                         {location}
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href={phone} target="_blank" rel="noopener noreferrer">
+                      <Link href={phone} target="_blank" rel="noopener noreferrer">
                         <i>
                           <FaPhone />
                         </i>
                         {phoneNumber}
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href={mail} target="_blank" rel="noopener noreferrer">
+                      <Link href={mail} target="_blank" rel="noopener noreferrer">
                         <i>
                           <FaEnvelope />
                         </i>
                         {email}
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -66,19 +66,19 @@ const Footer = () => {
                   <h3 className="footer-title">Categories</h3>
                   <ul className="footer-links">
                     <li>
-                      <a href="#">Hot deals</a>
+                      <Link href="#">Hot deals</Link>
                     </li>
                     <li>
-                      <a href="#">Laptops</a>
+                      <Link href="#">Laptops</Link>
                     </li>
                     <li>
-                      <a href="#">Smartphones</a>
+                      <Link href="#">Smartphones</Link>
                     </li>
                     <li>
-                      <a href="#">Cameras</a>
+                      <Link href="#">Cameras</Link>
                     </li>
                     <li>
-                      <a href="#">Accessories</a>
+                      <Link href="#">Accessories</Link>
                     </li>
                   </ul>
                 </div>
@@ -89,19 +89,19 @@ const Footer = () => {
                   <h3 className="footer-title">Information</h3>
                   <ul className="footer-links">
                     <li>
-                      <a href="/About">About Us</a>
+                      <Link href="/About">About Us</Link>
                     </li>
                     <li>
-                      <a href="/Contact">Contact Us</a>
+                      <Link href="/Contact">Contact Us</Link>
                     </li>
                     <li>
-                      <a href="/PrivacyPolicy">Privacy Policy</a>
+                      <Link href="/PrivacyPolicy">Privacy Policy</Link>
                     </li>
                     <li>
-                      <a href="#">Orders and Returns</a>
+                      <Link href="/OrdersReturns">Orders and Returns</Link>
                     </li>
                     <li>
-                      <a href="/TermsConditions">Terms &amp; Conditions</a>
+                      <Link href="/TermsConditions">Terms &amp; Conditions</Link>
                     </li>
                   </ul>
                 </div>
@@ -111,19 +111,19 @@ const Footer = () => {
                   <h3 className="footer-title">Service</h3>
                   <ul className="footer-links">
                     <li>
-                      <a href="#">My Account</a>
+                      <Link href="#">My Account</Link>
                     </li>
                     <li>
-                      <a href="#">View Cart</a>
+                      <Link href="/cartdetail">View Cart</Link>
                     </li>
                     <li>
-                      <a href="#">Wishlist</a>
+                      <Link href="/Wishlist">Wishlist</Link>
                     </li>
                     <li>
-                      <a href="#">Track My Order</a>
+                      <Link href="/TrackMyOrder">Track My Order</Link>
                     </li>
                     <li>
-                      <a href="#">Help</a>
+                      <Link href="/Help">Help</Link>
                     </li>
                   </ul>
                 </div>
@@ -138,25 +138,25 @@ const Footer = () => {
               <div className="col-md-12 text-center">
                 <ul className="footer-payments">
                   <li>
-                    <a href="#">
+                    <Link href="#">
                       <i>
                         <FaCcVisa />
                       </i>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">
+                    <Link href="#">
                       <i>
                         <FaRegCreditCard />
                       </i>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">
+                    <Link href="#">
                       <i>
                         <FaCcPaypal />
                       </i>
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a href="#">

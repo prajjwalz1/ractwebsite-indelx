@@ -17,9 +17,7 @@ function ProductPage({ product }) {
   }
 
   return (
-
     <>
-    
       <div className="container-p">
         <div className="product">
           <div className="product-img">
@@ -30,6 +28,7 @@ function ProductPage({ product }) {
               height={260}
             />
           </div>
+
           <div className="product-body">
             <p className="product-category">{product.category}</p>
             <h3 className="product-name">

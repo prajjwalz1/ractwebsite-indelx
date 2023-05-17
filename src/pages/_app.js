@@ -7,6 +7,9 @@ import "@/styles/productpage.css";
 import "@/styles/cartdetail.css";
 import "@/styles/shopcategory.css";
 import "@/styles/newproduct.css";
+import "@/styles/breadcrumbs.css";
+import "@/styles/store.css";
+import "@/styles/productdetails.css";
 import { CartContextProvider } from "../Context/CartContext";
 
 import Header from "../../components/Header";

@@ -11,8 +11,7 @@ body {
     margin-left: 200px;
     margin-right:200px ;
     height: 560px;
-    overflow-x: hidden;
-  }
+   }
   
    h2, h3, h4, h5 {
     color: #2B2D42;
@@ -23,7 +22,6 @@ body {
   a {
     color: #2B2D42;
     font-weight: 500;
-    -webkit-transition: 0.2s color;
     transition: 0.2s color;
   }
   
