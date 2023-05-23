@@ -1,5 +1,5 @@
 .cart-section{
-    padding: 20px;
+    padding: 1.25rem;
     width: 100%;
 
 }
@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     font-weight: 500;
-    padding: 20px;
+    padding: 1.25rem;
 }
 .itemname{
     margin-right: 300px;
@@ -20,7 +20,7 @@
 .item-content{
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 1.25rem;
     font-size: 14px;
 }
 .i-details{
@@ -30,16 +30,16 @@
     width: 40%;
 }
 .imag{
-    height: 120px;
-    width: 120px;
+    height: 11.25rem;
+    width: 11.25rem;
 }
 .imag img{
-    height: 120px;
-    width: 120px;
+    height: 11.25rem;
+    width: 11.25rem;
     object-fit: cover;
 }
 .i-name{
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 400;
 }
 .other-detail{
@@ -58,7 +58,7 @@
     color: #D10024;
 }
 .subtotal{
-    padding: 20px;
+    padding: 1.25rem;
     display: flex;
     justify-content: flex-end;
     margin-right: 180px;
@@ -111,7 +111,7 @@
     visibility: visible;
   }
   .check-container{
-    padding: 20px;
+    padding: 1.25rem;
     display: flex;
     justify-content: space-between;
   }
@@ -120,7 +120,7 @@
   }
   .con-shopping{
     height: 40px;
-    width: 200px;
+    width: 12.5rem;
     border-radius: 40px 40px 40px 40px;
     border: none;
     background-color: #cacaca;

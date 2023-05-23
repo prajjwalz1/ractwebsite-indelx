@@ -31,13 +31,13 @@
   
   .product-widget .product-body .product-category {
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: 0.625rem;
     color: #8D99AE;
   }
   
   .product-widget .product-body .product-name {
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
   
   .product-widget .product-body .product-name>a {
@@ -61,7 +61,7 @@
   
   .product-widget .product-body .product-price .qty {
     font-weight: 400;
-    margin-right: 10px;
+    margin-right: 0.625rem;
   }
   
   .product-widget .delete {
@@ -71,7 +71,7 @@
     height: 14px;
     width: 14px;
     text-align: center;
-    font-size: 10px;
+    font-size: 0.625rem;
     padding: 0;
     background: #1e1f29;
     border: none;

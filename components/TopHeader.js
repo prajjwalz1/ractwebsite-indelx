@@ -9,7 +9,6 @@ import {
 import Link from "next/link";
 import { phoneNumber, email, location } from "../src/assests";
 const phone = `tel:${phoneNumber}`;
-// const mail = `mailto:${email}`;
 const mail = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(email)}`;
 
 const encodedLocation = encodeURIComponent(location);

@@ -6,7 +6,6 @@ import "@/styles/footer.css";
 import "@/styles/productpage.css";
 import "@/styles/cartdetail.css";
 import "@/styles/shopcategory.css";
-import "@/styles/newproduct.css";
 import "@/styles/breadcrumbs.css";
 import "@/styles/store.css";
 import "@/styles/productdetails.css";
@@ -22,17 +21,27 @@ import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import NewsLetter from "../../components/NewsLetter";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps}) {
   return (
     <>
       <CartContextProvider>
         <TopHeader />
         <Header />
         <Navigation />
-        <Component {...pageProps} />
+        <Component {...pageProps}/>
         <NewsLetter/>
         <Footer />
       </CartContextProvider>
     </>
   );
 }
+// export async function getServerSideProps() {
+//   const res = await fetch("https://fakestoreapi.com/products");
+//   const products = await res.json();
+
+//   return {
+//     props: {
+//       products,
+//     },
+//   };
+// }

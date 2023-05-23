@@ -7,10 +7,6 @@
     align-items: center;
     height: 60px;
   }
-  .container{
-    margin-right: 200px;
-    margin-left: 200px;
-  }
   
   .main-nav>li>a:hover, .main-nav>li>a:focus, .main-nav>li.active>a {
     color: #D10024;
@@ -34,7 +30,7 @@
   .main-nav {
     display: flex;
     margin: 0;
-    padding: 20px 0px;
+    padding: 1.25rem 0px;
     list-style: none;
   }
   
@@ -57,5 +53,9 @@
     color: #D10024;
   }
   
-
+  @media screen and (max-width: 991px) {
+    .navigation{
+      display: none;
+    }
+  }
   

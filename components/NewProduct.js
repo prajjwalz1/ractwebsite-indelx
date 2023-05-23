@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { React } from "react";
 const NewProduct = () => {
   return (
@@ -10,24 +11,24 @@ const NewProduct = () => {
               <div className="section-nav">
                 <ul className="section-tab-nav">
                   <li className="active">
-                    <a data-toggle="tab" href="#">
+                    <Link data-toggle="tab" href="#">
                       Laptops
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a data-toggle="tab" href="#">
+                    <Link data-toggle="tab" href="#">
                       Smartphones
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a data-toggle="tab" href="#">
+                    <Link data-toggle="tab" href="#">
                       Cameras
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a data-toggle="tab" href="#">
+                    <Link data-toggle="tab" href="#">
                       Accessories
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

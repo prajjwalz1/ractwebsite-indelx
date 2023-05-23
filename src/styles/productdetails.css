@@ -3,7 +3,7 @@
 } */
 .product-detail-part {
   float: right;
-  padding: 10px;
+  padding: 0.625rem;
 }
 .image-part{
   display: flex;
@@ -13,7 +13,7 @@
 .small-images {
   display: inline-flex;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: 0.625rem;
   /* border: 2px solid rgb(224, 223, 223); */
   overflow: auto;
 
@@ -22,7 +22,7 @@
   cursor: pointer;
 }
 .main-image{
-  padding: 10px;
+  padding: 0.625rem;
 }
 .pro-det-part{
   display: flex;
@@ -39,7 +39,7 @@
 
 .p-Rating {
   display: inline-block;
-  margin-right: 15px;
+  margin-right: 0.9375rem;
 }
 
 .p-Rating>i{
@@ -47,14 +47,14 @@
 }
 
 .reviewLink {
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .product-price {
   display: inline-block;
   font-size: 24px;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  margin-top: 0.625rem;
+  margin-bottom: 0.9375rem;
   color: #D10024;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .productAvailable {
-  font-size: 12px;
+  font-size: 0.75rem;
   text-transform: uppercase;
   font-weight: 700;
   margin-left: 30px;
@@ -79,9 +79,9 @@
 
 .productOptions label {
   font-weight: 500;
-  font-size: 12px;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  margin-right: 15px;
+  margin-right: 0.9375rem;
   margin-bottom: 0px;
 }
 
@@ -144,22 +144,22 @@
   width: 39px;
   border: 1px solid #E4E7ED;
   background-color: #FFF;
-  padding: 0px 35px 0px 15px;
+  padding: 0px 35px 0px 0.9375rem;
 }
 .qty-label{
     display: inline-block;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    margin-right: 15px;
+    margin-right: 0.9375rem;
     margin-bottom: 0px;
   
 }
 .qty-up, .qty-down {
   position: absolute;
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   border: 1px solid #E4E7ED;
   background-color: #FFF;
   text-align: center;
@@ -193,23 +193,23 @@
 .productBtns li {
   display: inline-block;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .productBtns li+li {
-  margin-left: 15px;
+  margin-left: 0.9375rem;
 }
 .productLinks {
-  margin-top: 15px;
+  margin-top: 0.9375rem;
 }
 .productLinks li {
   display: inline-block;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .productLinks li+li {
-  margin-left: 10px;
+  margin-left: 0.625rem;
 }
 #product-tab {
   margin-top: 60px;
@@ -218,7 +218,7 @@
 #product-tab .tab-nav {
   position: relative;
   text-align: center;
-  padding: 15px 0px;
+  padding: 0.9375rem 0px;
   margin-bottom: 30px;
 }
 
@@ -236,11 +236,11 @@
 #product-tab .tab-nav li {
   display: inline-block;
   background: #FFF;
-  padding: 0px 15px;
+  padding: 0px 0.9375rem;
 }
 
 #product-tab .tab-nav li+li {
-  margin-left: 15px;
+  margin-left: 0.9375rem;
 }
 
 #product-tab .tab-nav li a {

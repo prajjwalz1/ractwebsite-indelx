@@ -11,22 +11,22 @@ const DownHeader = () => {
                 <Link href="/">Home</Link>
               </li>
               <li>
-               <Link href="/HotDeals">Hot Deals</Link>
+               <Link href="#">Hot Deals</Link>
               </li>
               <li>
-                <Link href="/Categories">Categories</Link>
+                <Link href="#">Categories</Link>
               </li>
               <li>
-                <Link href="/Laptops">Laptops</Link>
+                <Link href="#">Laptops</Link>
               </li>
               <li>
-                <Link href="/Smartphones">Smartphones</Link>
+                <Link href="#">Smartphones</Link>
               </li>
               <li>
-                <Link href="/Cameras">Cameras</Link>
+                <Link href="#">Cameras</Link>
               </li>
               <li>
-                <Link href="/Accessories">Accessories</Link>
+                <Link href="#">Accessories</Link>
               </li>
             </ul>
           </div>

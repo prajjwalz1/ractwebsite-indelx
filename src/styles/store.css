@@ -1,31 +1,46 @@
+
+.left-side{
+  padding: 0 0.9375rem;
+}
+.right-side{
+  padding: 0 0.9375rem;
+}
+.content{
+  display: flex;
+}
+.product-row{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 .aside+.aside {
     margin-top: 30px;
   }
+ 
   
   .aside>.aside-title {
     text-transform: uppercase;
     font-size: 18px;
-    margin: 15px 0px 30px;
+    margin: 0.9375rem 0px 30px;
   }
   
-  /*-- checkbox Filter --*/
   
   .checkbox-filter>div+div {
-    margin-top: 10px;
+    margin-top: 0.625rem;
   }
   
   .checkbox-filter .input-radio label, .checkbox-filter .input-checkbox label {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
   
   .checkbox-filter .input-radio label small, .checkbox-filter .input-checkbox label small {
     color: #8D99AE;
   }
   
-  /*-- Price Filter --*/
   
   #price-slider {
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
   }
   
   .price-filter .input-number {
@@ -33,16 +48,11 @@
     width: calc(50% - 7px);
   }
   
-  /*----------------------------*\
-      Store
-  \*----------------------------*/
-  
   .store-filter {
-    margin-bottom: 15px;
-    margin-top: 15px;
+    margin-bottom: 0.9375rem;
+    margin-top: 0.9375rem;
   }
   
-  /*-- Store Sort --*/
   
   .store-sort {
     display: inline-block;
@@ -50,12 +60,11 @@
   
   .store-sort label {
     font-weight: 500;
-    font-size: 12px;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    margin-right: 15px;
+    margin-right: 0.9375rem;
   }
   
-  /*-- Store Grid --*/
   
   .store-grid {
     float: right;
@@ -93,7 +102,6 @@
     display: block;
   }
   
-  /*-- Store Pagination --*/
   
   .store-pagination {
     float: right;
@@ -136,5 +144,5 @@
     margin-right: 30px;
     font-weight: 500;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 0.75rem;
   }

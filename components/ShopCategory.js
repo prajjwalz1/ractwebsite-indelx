@@ -2,6 +2,7 @@ import React from "react";
 import { product08, product09, product05 } from "../src/assests";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 
 const ShopCategory = () => {
   return (
@@ -12,7 +13,13 @@ const ShopCategory = () => {
             <div className="ShopCategory">
               <div className="shop">
                 <div className="shop-img">
-                  <Image className="imj" src={product08} alt="" />
+                  <Image
+                    className="imj"
+                    src={product08}
+                    alt="pro"
+                    width={240}
+                    height={310}
+                  />
                 </div>
                 <div className="shop-body">
                   <h3>
@@ -20,17 +27,17 @@ const ShopCategory = () => {
                     <br />
                     Collection
                   </h3>
-                  <a href="#" className="cta-btn">
+                  <Link href="#" className="cta-button">
                     Shop now
                     <i>
                       <FaArrowAltCircleRight />
                     </i>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="shop">
                 <div className="shop-img">
-                  <Image src={product05} alt="" />
+                  <Image src={product05} alt="pro" width={240} height={310} />
                 </div>
                 <div className="shop-body">
                   <h3>
@@ -38,17 +45,17 @@ const ShopCategory = () => {
                     <br />
                     Collection
                   </h3>
-                  <a href="#" className="cta-btn">
+                  <Link href="#" className="cta-button">
                     Shop now
                     <i>
                       <FaArrowAltCircleRight />
                     </i>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="shop">
                 <div className="shop-img">
-                  <Image src={product09} alt="" />
+                  <Image src={product09} alt="pro" width={240} height={310} />
                 </div>
                 <div className="shop-body">
                   <h3>
@@ -56,12 +63,12 @@ const ShopCategory = () => {
                     <br />
                     Collection
                   </h3>
-                  <a href="#" className="cta-btn">
+                  <Link href="#" className="cta-button">
                     Shop now
                     <i>
                       <FaArrowAltCircleRight />
                     </i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

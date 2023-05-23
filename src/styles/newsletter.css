@@ -14,7 +14,7 @@
   
   .newsletter form {
     position: relative;
-    max-width: 520px;
+    max-width: 51.25rem;
     margin: 30px auto;
   }
   
@@ -24,7 +24,7 @@
     position: absolute;
     font-size: 160px;
     color: #E4E7ED;
-    top: 15px;
+    top: 0.9375rem;
     -webkit-transform: translateY(-50%) rotate(15deg);
     -ms-transform: translateY(-50%) rotate(15deg);
     transform: translateY(-50%) rotate(15deg);

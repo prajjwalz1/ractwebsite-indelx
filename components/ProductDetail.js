@@ -41,7 +41,6 @@ export default function ProductDetail({ product }) {
   const breadCrumbs=[
     {name:"Home",url:'/'},
     {name: `${product.title}...`,url:`/product/${product.id}`},
-
   ]
   return (
     <>
@@ -90,27 +89,28 @@ export default function ProductDetail({ product }) {
                   <div className="main-image">
                     <div className="product-image">
                       
-                      {/* <ReactImageMagnify
+                      <ReactImageMagnify
                         {...{
                           smallImage: {
-                            alt: "Wristwatch by Ted Baker London",
-                            isFluidWidth: true,
-                            src: {mainImage},
+                            alt: "",
+                            src: (mainImage),
+                            width:450,
+                            height:450,
                           },
                           largeImage: {
-                            src: {mainImage},
+                            src: (mainImage),
                             width: 1200,
-                            height: 1800,
+                            height: 1200,
                           },
                         }}
-                      /> */}
-                      <Image
+                      />
+                      {/* <Image
                         src={mainImage}
                         alt={product.title}
                         width={450}
                         height={450}
                         className="zoomed-image"
-                      />
+                      /> */}
                     </div>
                   </div>
                 </div>
