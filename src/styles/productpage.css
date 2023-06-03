@@ -1,17 +1,24 @@
-.p-container{
+/* .p-container{
     display: flex;
     gap: 1.2rem; 
     margin-left: 0.2rem;
 
 
-}
-.pcon{
+} */
+/* .pcon{
   overflow-x: hidden;
   height: 36rem;
 
-}
-.conatiner{
+} */
+/* .conatiner{
   overflow-x: hidden;
+} */
+.react-multi-carousel-list{
+  height: 38.5rem;
+
+}
+.react-multi-carousel-track li{
+  margin-right: 0.02rem;
 }
 .product {
     position: relative;
@@ -28,15 +35,14 @@
     box-shadow: 0px 0px 6px 0px #E4E7ED, 0px 0px 0px 2px #D10024;
     }
     
-    .product .product-img {
+    .product-img {
+    display: flex;
     position: relative;
-    height: 262px;
-    width: 262px;
+    align-items: center;
     }
     
-    .product .product-img>Image {
-    width: 100%;
-    height: 100%;
+    .product-img>img {
+    margin-left: 1rem;
     }
     
     .product .product-body {
@@ -64,6 +70,7 @@
     
     .product .product-body .product-name>a {
     font-weight: 700;
+    text-decoration: none;
     }
     
     .product .product-body .product-name>a:hover, .product .product-body .product-name>a:focus {
@@ -79,6 +86,7 @@
     font-size: 70%;
     font-weight: 400;
     color: #8D99AE;
+    margin-left: 0.5rem;
     }
     
     .product .product-body .product-rating {
@@ -236,4 +244,11 @@
       color: white;
       cursor: pointer;
     }
+      @media (max-width:560px ){
+        .react-multi-carousel-track li{
+          margin-left: 0.25rem;
+        }
+      
+        
+      }
     

@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { React } from "react";
-const NewProduct = () => {
+const TopSellingH = () => {
   return (
     <>
         <div className="section-n">
           <div className="product-container">
             <div className="col-md-12">
               <div className="section-title">
-                <h3 className="title">New Products</h3>
+                <h3 className="title">Top Selling</h3>
                 <div className="section-nav">
                   <ul className="section-tab-nav">
                     <li className="active">
@@ -40,4 +40,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default TopSellingH;

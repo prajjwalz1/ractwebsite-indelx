@@ -1,30 +1,32 @@
 import Head from "next/head";
-import ProductPage from "../../components/ProductPage";
 import ShopCategory from "../../components/ShopCategory";
 import NewProduct from "../../components/NewProduct";
 import TopSelling from "../../components/TopSelling";
-import Store from "../../components/Store";
-import ProductPageSlider from "../../components/ProductPageSlider";
-// import Detail from "../../components/Detail";
+// import Store from "../../components/Store";
 import ProPage from "../../components/ProPage";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import TopSellingH from "../../components/TopSellingH";
 export default function Home({ products, category }) {
   const responsive = {
     superLargeDesktop: {
-      breakpoint: { max: 4000, min: 1024 },
+      breakpoint: { max: 4000, min: 1470 },
       items: 4,
     },
     desktop: {
-      breakpoint: { max: 1024, min: 800 },
-      items: 4,
+      breakpoint: { max: 1470, min: 1220 },
+      items: 3,
+    },
+    Smalldesktop: {
+      breakpoint: { max: 1220, min: 824 },
+      items: 3,
     },
     tablet: {
-      breakpoint: { max: 800, min: 464 },
+      breakpoint: { max: 824, min: 561 },
       items: 2,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 561, min: 0 },
       items: 1,
     },
   };
@@ -39,22 +41,46 @@ export default function Home({ products, category }) {
 
       <ShopCategory />
       <div className="container">
-        <Carousel
-          responsive={responsive}
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={1000}
-        >
-          {products.map((product) => {
-            return <ProPage key={product.id} product={product} />;
-          })}
-        </Carousel>
+        <NewProduct />
+        <div className="pro-item">
+          <Carousel
+            responsive={responsive}
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={1000}
+            ssr={true}
+            focusOnSelect={true}
+          >
+            {products.map((product) => {
+              return <ProPage key={product.id} product={product} />;
+            })}
+          </Carousel>
+        </div>
       </div>
-      {/* <Store category={category}products={products}/> */}
-      {/* <Detail/> */}
-      {/* <ProductPageSlider /> */}
-      {/* <ProductPage products={products} /> */}
-      <TopSelling products={products} />
+      <div className="container">
+        <TopSellingH />
+        <div className="pro-item">
+          <Carousel
+            responsive={responsive}
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={1000}
+          >
+            {products.map((product) => {
+              return <ProPage key={product.id} product={product} />;
+            })}
+          </Carousel>
+        </div>
+      </div>
+      {/* <div className="container">
+        <div className="topsell-container">
+          <div className="top-section">
+            <TopSelling products={products} />
+            <TopSelling products={products} />
+            <TopSelling products={products} />
+          </div>
+        </div>
+      </div> */}
     </>
   );
 }

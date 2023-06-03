@@ -16,17 +16,16 @@
     position: relative;
     max-width: 51.25rem;
     margin: 30px auto;
+    display: flex;
   }
   
   .newsletter form:after {
     content: "\f003";
-    font-family: FontAwesome;
+    /* font-family: FontAwesome; */
     position: absolute;
     font-size: 160px;
     color: #E4E7ED;
     top: 0.9375rem;
-    -webkit-transform: translateY(-50%) rotate(15deg);
-    -ms-transform: translateY(-50%) rotate(15deg);
     transform: translateY(-50%) rotate(15deg);
     z-index: -1;
     left: -90px;

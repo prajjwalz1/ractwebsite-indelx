@@ -52,6 +52,12 @@
   .main-nav li a:hover {
     color: #D10024;
   }
+  @media screen and (max-width: 1200px) {
+    .container{
+      margin-left: 1.5rem;
+      
+    }
+  }
   
   @media screen and (max-width: 991px) {
     .navigation{

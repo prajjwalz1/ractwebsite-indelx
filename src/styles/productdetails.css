@@ -21,6 +21,10 @@
 .imj{
   cursor: pointer;
 }
+.product-image {
+  position: relative;
+  z-index: 9999;
+}
 .main-image{
   padding: 0.625rem;
 }

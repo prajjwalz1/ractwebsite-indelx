@@ -61,6 +61,7 @@
     font-weight: 700;
     border: none;
     border-radius: 0px 40px 40px 0px;
+    cursor: pointer;
   }
   .header-ctn {
     float: right;
@@ -140,15 +141,15 @@
     display: flex;
   }
   .product_img{
-    width: 50px;
-    height: 50px;
+    width: 2.5rem;
+    height: 2.5rem;
     position: relative;
    display: inline-block;
     
   }
   .product_img img {
-    width: 50px;
-    height: 50px;
+    width: 2.5rem;
+    height: 2.5rem;
     object-fit: cover;
   }
   .product_price {
@@ -167,8 +168,11 @@
     top: 0;
     left: 0;
   }
+  .product_name{
+    margin-left: 0.5rem;
+  }
   .product_name a{
-    font-size: 16px;
+    font-size: 1rem;
     text-decoration: none;
   }
   .product_price {
@@ -255,7 +259,7 @@
   }
   
 
- @media (max-width:1040px ){
+ @media (max-width:1200px ){
   .container{
     margin-left: 0.5rem;
     margin-right: 0.5rem;

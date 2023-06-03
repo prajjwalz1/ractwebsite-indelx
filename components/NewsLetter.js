@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React from "react";
+import { FaFacebook,FaTwitter,FaInstagram,FaLinkedin } from "react-icons/fa";
 
 const NewsLetter = () => {
   return (
@@ -15,7 +17,7 @@ const NewsLetter = () => {
                   <input
                     className="input"
                     type="email"
-                    placeholder="Enter Your Email"
+                   placeholder="Enter Your Email"
                   />
                   <button className="newsletter-btn">
                     <i className="fa fa-envelope"></i> Subscribe
@@ -23,24 +25,24 @@ const NewsLetter = () => {
                 </form>
                 <ul className="newsletter-follow">
                   <li>
-                    <a href="#">
-                      <i className="fa fa-facebook"></i>
-                    </a>
+                    <Link href="#">
+                      <i><FaFacebook/></i>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">
-                      <i className="fa fa-twitter"></i>
-                    </a>
+                    <Link href="#">
+                      <i><FaTwitter/></i>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">
-                      <i className="fa fa-instagram"></i>
-                    </a>
+                    <Link href="#">
+                      <i><FaInstagram/></i>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#">
-                      <i className="fa fa-pinterest"></i>
-                    </a>
+                    <Link href="#">
+                      <i><FaLinkedin/></i>
+                    </Link>
                   </li>
                 </ul>
               </div>

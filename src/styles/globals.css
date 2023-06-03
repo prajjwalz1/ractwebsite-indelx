@@ -41,19 +41,20 @@ ul {
     height: 0.125rem;
     color: #D10024;
   }
-  
+
   .section-title {
     position: relative;
     margin-bottom: 1.875rem;
     margin-top: 0.9375rem;
   }
   
-  .section-title .title {
+  .title {
     display: inline-block;
     text-transform: uppercase;
     margin: 0px;
+    font-weight: 700;
+    font-size: 1.5rem;
   }
-  
   .section-title .section-nav {
     float: right;
   }
@@ -99,4 +100,14 @@ ul {
   .section-title .section-nav .products-slick-nav {
     top: 0px;
     right: 0px;
+  }
+
+  h2.jsx-3288a97c3b2f1803{
+    font-weight: 400;
+    font-size: 20px;
+  }
+  ul.jsx-3288a97c3b2f1803{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.2rem;
   }

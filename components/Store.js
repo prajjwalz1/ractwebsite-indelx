@@ -1,98 +1,187 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Slider from "@mui/material/Slider";
 import Image from "next/image";
+import Link from "next/link";
 import {
   FaStar,
   FaEye,
   FaShoppingCart,
   FaRegHeart,
   FaExchangeAlt,
-  FaArrowCircleRight,FaTh,FaList
+  FaArrowCircleRight,
+  FaTh,
+  FaList,
+  FaArrowCircleLeft,
 } from "react-icons/fa";
 import Breadcrumbs from "./Breadcrumbs";
+import { CartContext } from "../src/Context/CartContext";
 
-const Store = ({ category, products }) => {
-  const [value, setValue] = React.useState([0, 10000]);
+const Store = ({ products, categories }) => {
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [priceRange, setPriceRange] = useState([0, 10000]);
+  const [sortBy, setSortBy] = useState("popular");
+  const [perPage, setPerPage] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleCategoryChange = (category) => {
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(
+        selectedCategories.filter((cat) => cat !== category)
+      );
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
   };
 
+  const handleBrandChange = (brand) => {
+    if (selectedBrands.includes(brand)) {
+      setSelectedBrands(selectedBrands.filter((b) => b !== brand));
+    } else {
+      setSelectedBrands([...selectedBrands, brand]);
+    }
+  };
+
+  const handlePriceRangeChange = (event, newValue) => {
+    setPriceRange(newValue);
+  };
+
+  const filteredProducts = products
+    .filter((product) => {
+      const isInSelectedCategories =
+        selectedCategories.length === 0 ||
+        selectedCategories.includes(product.category);
+      const isInSelectedBrands =
+        selectedBrands.length === 0 || selectedBrands.includes(product.brand);
+      const isInRange =
+        product.price >= priceRange[0] && product.price <= priceRange[1];
+      return isInSelectedCategories && isInSelectedBrands && isInRange;
+    })
+    .sort((a, b) => {
+      if (sortBy === "popular") {
+        return b.popularity - a.popularity;
+      } else if (sortBy === "position") {
+        return a.position - b.position;
+      } else {
+        return 0;
+      }
+    });
+
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * perPage,
+    currentPage * perPage
+  );
+
+  const getCategoryProductCount = (category) => {
+    return products.filter((product) => product.category === category).length;
+  };
+
+  const getBrandProductCount = (brand) => {
+    return products.filter((product) => product.brand === brand).length;
+  };
+
+  const { addProduct } = useContext(CartContext);
+
+  function addToCart(productId) {
+    addProduct(productId);
+  }
 
   return (
-    <>
-      <div className="section">
-        <div className="container">
-          {/* <Breadcrumbs/> */}
-          <div className="row">
-            <div className="content">
-              <div className="left-side">
-                <div className="aside">
-                  <h3 className="aside-title">Categories</h3>
-                  {category.map((category) => (
-                    <div className="checkbox-filter" key={category.id}>
-                      <div className="input-checkbox">
-                        <input type="checkbox" id="category-1" />
-                        <label htmlFor="category-1">
-                          <span></span>
-                          {category}
-                          <small>({category.length})</small>
-                        </label>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="aside">
-                  <h3 className="aside-title">Price</h3>
-                  <div className="qtylabel">
-                    <div className="input-number">
-                      <input type="number" value="" />
-                      <span className="qty-up">+</span>
-                      <span className="qty-down">-</span>
-                    </div>
-                    <span>-</span>
-                    <div className="input-number">
-                      <input type="number" value="" />
-                      <span className="qty-up">+</span>
-                      <span className="qty-down">-</span>
-                    </div>
+    <div className="section">
+      <div className="container">
+        <div className="row">
+          <div className="content">
+            <div className="left-side">
+              <div className="aside">
+                <h3 className="aside-title">Categories</h3>
+                {categories.map((category) => (
+                  <div className="checkbox-filter" key={category.id}>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={selectedCategories.includes(category)}
+                        onChange={() => handleCategoryChange(category)}
+                      />
+                      {category} ({getCategoryProductCount(category)})
+                    </label>
                   </div>
-                  <div className="price-filter">
-                    <Slider
-                      className="price_slider"
-                      getAriaLabel={() => "Price Range"}
-                      value={value}
-                      onChange={handleChange}
-                      valueLabelDisplay="auto"
-                      min={0}
-                      max={10000}
+                ))}
+              </div>
+              <div className="aside">
+                <h3 className="aside-title">Price</h3>
+                <div className="qtylabel">
+                  <div className="input-number">
+                    <input
+                      type="number"
+                      value={priceRange[0] === 0 ? "0" : priceRange[0]}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/^0+/, "");
+                        setPriceRange([
+                          value === "" ? 0 : Number(value),
+                          priceRange[1],
+                        ]);
+                      }}
                     />
+                    <span className="qty-up">+</span>
+                    <span className="qty-down">-</span>
+                  </div>
+                  <span>-</span>
+                  <div className="input-number">
+                    <input
+                      type="number"
+                      value={priceRange[1] === 0 ? "" : priceRange[1]}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/^0+/, "");
+                        setPriceRange([
+                          priceRange[0],
+                          value === "" ? 0 : Number(value),
+                        ]);
+                      }}
+                    />
+                    <span className="qty-up">+</span>
+                    <span className="qty-down">-</span>
                   </div>
                 </div>
-                <div className="aside">
-                  <h3 className="aside-title">Brand</h3>
-                  {category.map((category) => (
-                    <div className="checkbox-filter" key={category.id}>
-                      <div className="input-checkbox">
-                        <input type="checkbox" id="category-1" />
-                        <label htmlFor="category-1">
-                          <span></span>
-                          {category}
-                          <small>({category.length})</small>
-                        </label>
-                      </div>
-                    </div>
-                  ))}
+                <div className="price-filter">
+                  <Slider
+                    className="price_slider"
+                    value={priceRange}
+                    onChange={handlePriceRangeChange}
+                    min={0}
+                    step={1}
+                    valueLabelDisplay="auto"
+                    max={
+                      products.length > 0
+                        ? Math.max(...products.map((product) => product.price))
+                        : 0
+                    }
+                  />
                 </div>
-                <div className="aside">
-                  <h3 className="aside-title">Top selling</h3>
-                  {products.map((product) => (
+              </div>
+              <div className="aside">
+                <h3 className="aside-title">Brand</h3>
+                {categories.map((brand) => (
+                  <div className="checkbox-filter" key={brand.id}>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={selectedBrands.includes(brand)}
+                        onChange={() => handleBrandChange(brand)}
+                      />
+                      {brand} ({getBrandProductCount(brand)})
+                    </label>
+                  </div>
+                ))}
+              </div>
+              <div className="aside">
+                <h3>Top Selling</h3>
+                <div className="top-product">
+                  {products.slice(0, 5).map((product) => (
                     <div className="product-widget" key={product.id}>
-                      <div className="product-img">
+                      <div className="product--img">
                         <Image
                           src={product.image}
-                          alt=""
+                          alt={product.title}
                           width={60}
                           height={60}
                         />
@@ -100,10 +189,12 @@ const Store = ({ category, products }) => {
                       <div className="product-body">
                         <p className="product-category">{product.category}</p>
                         <h3 className="product-name">
-                          <a href="#">{product.title}</a>
+                          <Link href={`/product/${product.id}`} tabIndex="-1">
+                            {product.title}
+                          </Link>
                         </h3>
                         <h4 className="product-price">
-                          {product.price}{" "}
+                          {product.price}
                           <del className="product-old-price">$990.00</del>
                         </h4>
                       </div>
@@ -111,127 +202,172 @@ const Store = ({ category, products }) => {
                   ))}
                 </div>
               </div>
-              <div className="right-side">
-                <div className="store-filter clearfix">
-                  <div className="store-sort">
-                    <label>
-                      Sort By:
-                      <select className="input-select">
-                        <option value="0">Popular</option>
-                        <option value="1">Position</option>
-                      </select>
-                    </label>
+            </div>
+            <div className="right-side">
+              <div className="store-filter clearfix">
+                <div className="store-sort">
+                  <label>
+                    Sort By:
+                    <select
+                      className="input-select"
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                    >
+                      <option value="popular">Popular</option>
+                      <option value="position">Position</option>
+                    </select>
+                  </label>
 
-                    <label>
-                      Show:
-                      <select className="input-select">
-                        <option value="0">20</option>
-                        <option value="1">50</option>
-                      </select>
-                    </label>
-                  </div>
-                  <ul className="store-grid">
-                    <li className="active">
-                      <i><FaTh/></i>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i><FaList/></i>
-                      </a>
-                    </li>
-                  </ul>
+                  <label>
+                    Show:
+                    <select
+                      className="input-select"
+                      value={perPage}
+                      onChange={(e) => setPerPage(Number(e.target.value))}
+                    >
+                      <option value="6">6</option>
+                      <option value="20">20</option>
+                    </select>
+                  </label>
                 </div>
-                <div className="product-row">
-                  {products.map((product) => (
-                    <div className="product-grid" key={product.id}>
-                      <div className="product">
-                        <div className="product-img">
-                          <Image
-                            src={product.image}
-                            alt=""
-                            width={262}
-                            height={262}
-                          />
-                          <div className="product-label">
-                            <span className="sale">-30%</span>
-                            <span className="new">NEW</span>
-                          </div>
+                <ul className="store-grid">
+                  <li className="active">
+                    <i>
+                      <FaTh />
+                    </i>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i>
+                        <FaList />
+                      </i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className="product-row">
+                {paginatedProducts.map((product, index) => (
+                  <div className="product-grid" key={index}>
+                    <div className="product">
+                      <div className="product-img">
+                        <Image
+                          src={product.image}
+                          alt={product.title}
+                          width={262}
+                          height={262}
+                        />
+                      </div>
+                      <div className="product-body">
+                        <p className="product-category">{product.category}</p>
+                        <h3 className="product-name">
+                          <Link href={`/product/${product.id}`} tabindex="-1">
+                            {product.title}
+                          </Link>
+                        </h3>
+                        <h4 className="product-price">
+                          {product.price}
+                          <del className="product-old-price">$990.00</del>
+                        </h4>
+                        <div className="product-rating">
+                          <i>
+                            <FaStar />
+                          </i>
+                          <i>
+                            <FaStar />
+                          </i>
+                          <i>
+                            <FaStar />
+                          </i>
+                          <i>
+                            <FaStar />
+                          </i>
+                          <i>
+                            <FaStar />
+                          </i>
                         </div>
-                        <div className="product-body">
-                          <p className="product-category">{product.category}</p>
-                          <h3 className="product-name">
-                            <a href="#">{product.title}</a>
-                          </h3>
-                          <h4 className="product-price">
-                            {product.price}{" "}
-                            <del className="product-old-price">$990.00</del>
-                          </h4>
-                          <div className="product-rating">
+                        <div className="product-btns">
+                          <button className="add-to-wishlist">
                             <i>
-                              <FaStar />
+                              <FaRegHeart />
                             </i>
+                            <span className="tooltipp">add to wishlist</span>
+                          </button>
+                          <button className="add-to-compare">
                             <i>
-                              <FaStar />
+                              <FaExchangeAlt />
                             </i>
-                            <i>
-                              <FaStar />
-                            </i>
-                            <i>
-                              <FaStar />
-                            </i>
-                            <i>
-                              <FaStar />
-                            </i>
-                          </div>
-                          <div className="product-btns">
-                            <button className="add-to-wishlist">
-                              <i>
-                                <FaRegHeart />
-                              </i>
-                              <span className="tooltipp">add to wishlist</span>
-                            </button>
-                            <button className="add-to-compare">
-                              <i>
-                                <FaExchangeAlt />
-                              </i>
-                              <span className="tooltipp">add to compare</span>
-                            </button>
-                            <button className="quick-view">
+                            <span className="tooltipp">add to compare</span>
+                          </button>
+                          <button className="quick-view">
+                            <Link href={`/product/${product.id}`}>
                               <i>
                                 <FaEye />
                               </i>
-                              <span className="tooltipp">quick view</span>
-                            </button>
-                          </div>
-                        </div>
-                        <div className="add-to-cart">
-                          <button className="add-to-cart-btn">
-                            <i>
-                              <FaShoppingCart />
-                            </i>
-                            add to cart
+                            </Link>
+                            <span className="tooltipp">quick view</span>
                           </button>
                         </div>
                       </div>
+                      <div className="add-to-cart">
+                        <button onClick={() => addToCart(product.id)} className="add-to-cart-btn">
+                          <i>
+                            <FaShoppingCart />
+                          </i>
+                          add to cart
+                        </button>
+                      </div>
                     </div>
-                  ))}
+                  </div>
+                ))}
+              </div>
+              <div className="store-filter clearfix">
+                <ul className="store-pagination">
+                  <li
+                    className={`${
+                      currentPage === 1 ? "disabled" : ""
+                    } store-pagination-item`}
+                    onClick={() => setCurrentPage(currentPage - 1)}
+                  >
+                    <FaArrowCircleLeft />
+                  </li>
+                  {Array.from(
+                    { length: Math.ceil(filteredProducts.length / perPage) },
+                    (_, i) => (
+                      <li
+                        key={i}
+                        className={`${
+                          currentPage === i + 1 ? "active" : ""
+                        } store-pagination-item`}
+                        onClick={() => setCurrentPage(i + 1)}
+                      >
+                        {i + 1}
+                      </li>
+                    )
+                  )}
+                  <li
+                    className={`${
+                      currentPage ===
+                      Math.ceil(filteredProducts.length / perPage)
+                        ? "disabled"
+                        : ""
+                    } store-pagination-item`}
+                    onClick={() => setCurrentPage(currentPage + 1)}
+                  >
+                    <FaArrowCircleRight />
+                  </li>
+                </ul>
+                <div className="pagiproduct">
+                <span className="store-pagination">
+                  Showing {paginatedProducts.length} of {""}
+                  {filteredProducts.length} products
+                </span>
                 </div>
-                <div className="store-filter clearfix">
-							<span className="store-qty">Showing 20-100 products</span>
-							<ul className="store-pagination">
-								<li className="active">1</li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#"><i ><FaArrowCircleRight/></i></a></li>
-							</ul>
-						</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

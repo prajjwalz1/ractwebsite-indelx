@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaTrash, FaCheck } from "react-icons/fa";
+import { FaTrash, FaCheck, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Image from "next/image";
 import { CartContext } from "@/Context/CartContext";
 import axios from "axios";
+import Link from "next/link";
 
 const CartDetails = () => {
-  const { cartProducts, addProduct, removeProduct, deleteFromCart} =
+  const { cartProducts, addProduct, removeProduct, deleteFromCart } =
     useContext(CartContext);
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -34,97 +35,120 @@ const CartDetails = () => {
   return (
     <div className="container">
       {cartProducts.length === 0 ? (
-        <h2>Your Cart is Empty!</h2>
+        <div>
+          <h3>Your Cart is Empty!</h3>
+          <div className="keepshopping">
+            <Link href="/AllCategories">
+              <button className="con-shopping">Continue Shopping</button>
+            </Link>
+          </div>
+        </div>
       ) : (
         <div className="cart-section">
           <div className="yourbasket">Your Basket</div>
-          <hr className="h-line" />
-          <div className="item-details">
-            <div className="itemname">Item</div>
-            <div className="price">Price</div>
-            <div className="itemquantity">Quantity</div>
-            <div className="total">Total</div>
-            <div className="delete">Delete</div>
-          </div>
-          <hr className="h-line" />
-          <div className="pr-d">
-            {products.map((product) => (
-              <div className="item-content">
-                <div className="i-details">
-                  <div className="imag">
-                    <Image
-                      src={product.image}
-                      alt={product.title}
-                      width={80}
-                      height={80}
-                    />
-                  </div>
-                  <div className="i-name">
-                    <span>{product.title}</span>
-                  </div>
-                </div>
-                <div className="other-detail">
-                  <div className="itemprice">${product.price}</div>
-                  <div className="itemquantity">
-                    <div className="qty">
-                      <button
-                        className="qty-minus"
-                        onClick={() => decreaseThisProduct(product.id)}
-                      >
-                        <span>-</span>
-                      </button>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr>
+                  <td>
+                    <div className="media">
+                      <div className="d-flex">
+                        <Image
+                          src={product.image}
+                          alt=""
+                          width={100}
+                          height={100}
+                        />
+                      </div>
+                      <div className="media-body">
+                        <p>{product.title}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <h5>${product.price}</h5>
+                  </td>
+                  <td>
+                    <div className="input-number">
                       <input
-                        type="text"
-                        className="qty-input"
+                        type="number"
                         value={
-                          cartProducts.filter((id) => id === product.id).length
+                          cartProducts.filter((id) => id === product.id)
+                            .length > 0
+                            ? cartProducts.filter((id) => id === product.id)
+                                .length
+                            : 0
                         }
                       />
-                      <button
-                        className="qty-plus"
+                      <span
+                        className="qty-up"
                         onClick={() => increaseThisProduct(product.id)}
                       >
-                        <span>+</span>
-                      </button>
+                        +
+                      </span>
+                      <span
+                        className="qty-down"
+                        onClick={() => decreaseThisProduct(product.id)}
+                      >
+                        -
+                      </span>
                     </div>
-                  </div>
-                  <div className="itemtoatal">
-                    $
-                    {product.price *
-                      cartProducts.filter((id) => id === product.id).length}
-                  </div>
-                  <div
-                    className="itemdelete"
-                    onClick={() => deleteitemfromcart(product)}
-                  >
-                    <FaTrash />
-                  </div>
+                  </td>
+                  <td>
+                    <div className="itemtoatal">
+                      $
+                      {product.price *
+                        cartProducts.filter((id) => id === product.id).length}
+                    </div>
+                  </td>
+                  <td>
+                    <div
+                      className="itemdelete"
+                      onClick={() => deleteitemfromcart(product.id)}
+                    >
+                      <FaTrash />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Subtotal :</h5>
+                </td>
+                <td>
+                  <h5>${total}</h5>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr className="h-line" />
+              <div className="check-container">
+                <div className="checkout">
+                  <Link href="/AllCategories">
+                    <button className="con-shopping">Continue Shopping</button>
+                  </Link>
+                </div>
+                <div className="check-out">
+                  <button className="check-button">
+                    <i>
+                      <FaCheck />
+                    </i>
+                    PROCEED TO CHECKOUT
+                  </button>
                 </div>
               </div>
-            ))}
-            <hr className="h-line" />
-          </div>
-
-          <div className="subtotal">
-            <div className="sub-total">
-              Total Amount:
-              <div className="amount">{total}</div>
-            </div>
-          </div>
-          <hr className="h-line" />
-          <div className="check-container">
-            <div className="checkout">
-              <button className="con-shopping">Continue Shopping</button>
-            </div>
-            <div className="check-out">
-              <button className="check-button">
-                <i>
-                  <FaCheck />
-                </i>
-                PROCEED TO CHECKOUT
-              </button>
-            </div>
-          </div>
+         
         </div>
       )}
     </div>

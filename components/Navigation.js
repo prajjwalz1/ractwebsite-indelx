@@ -10,11 +10,11 @@ const DownHeader = () => {
               <li className="active">
                 <Link href="/">Home</Link>
               </li>
-              <li>
+              {/* <li>
                <Link href="#">Hot Deals</Link>
-              </li>
+              </li> */}
               <li>
-                <Link href="#">Categories</Link>
+                <Link href="/AllCategories">Categories</Link>
               </li>
               <li>
                 <Link href="#">Laptops</Link>

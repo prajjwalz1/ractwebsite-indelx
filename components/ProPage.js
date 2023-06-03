@@ -6,16 +6,14 @@ import {
   FaEye,
   FaExchangeAlt,
   FaRegHeart,
-  FaShoppingCart,
-  FaAngleLeft,
-  FaAngleRight,
+  FaShoppingCart
 } from "react-icons/fa";
 import { CartContext } from "../src/Context/CartContext";
 
 const ProPage = ({ product }) => {
   const { addProduct } = useContext(CartContext);
   function addToCart() {
-    addProduct(products.id);
+    addProduct(product.id);
   }
 
   return (
@@ -25,8 +23,8 @@ const ProPage = ({ product }) => {
           <Image
             src={product.image}
             alt={product.title}
-            width={260}
-            height={260}
+            width={225}
+            height={225}
           />
         </div>
 

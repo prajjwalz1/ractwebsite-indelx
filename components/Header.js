@@ -12,9 +12,11 @@ import {
 import axios from "axios";
 import { CartContext } from "@/Context/CartContext";
 import Navigation from "./Navigation";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const [categories, setCategories] = useState([]);
+
 
   useEffect(() => {
     fetchCategories();
@@ -75,13 +77,10 @@ const Header = () => {
     total += price;
   }
 
-  const addToCart = (product) => {
-    setCartProducts((prevCartProducts) => [...prevCartProducts, product]);
-  };
-
-  // const uniqueid = new Set(products.map((product) => product.id));
-  //   const uniqueProductCount = uniqueid.size;
-
+  // const addToCart = (product) => {
+  //   setCartProducts((prevCartProducts) => [...prevCartProducts, product]);
+  // };
+  
   return (
     <>
       <div className="header">
@@ -95,21 +94,7 @@ const Header = () => {
                   </Link>
                 </div>
               </div>
-
-              <div className="search-part">
-                <div className="header-search">
-                  <select className="input-select">
-                    <option value="0">All Categories</option>
-                    {categories.map((category) => (
-                      <option key={category} value={category}>
-                        {category}
-                      </option>
-                    ))}
-                  </select>
-                  <input className="input" placeholder="Search here" />
-                  <button className="search-btn">Search</button>
-                </div>
-              </div>
+              <SearchBar/>
 
               <div className="ctn-part">
                 <div className="header-ctn">
@@ -158,14 +143,14 @@ const Header = () => {
                                   <Image
                                     src={product.image}
                                     alt={product.title}
-                                    width={30}
-                                    height={30}
+                                    width={100}
+                                    height={100}
                                   />
                                 </div>
                                 <div className="product_body">
-                                  <h3 className="product_name">
+                                  <h5 className="product_name">
                                     {product.title}
-                                  </h3>
+                                  </h5>
                                   <h4 className="product_price">
                                     <span className="qnty">
                                       {
@@ -173,7 +158,7 @@ const Header = () => {
                                           (id) => id === product.id
                                         ).length
                                       }
-                                    </span>
+                                    </span>$
                                     {product.price}
                                   </h4>
                                 </div>
@@ -181,7 +166,6 @@ const Header = () => {
                             ))}
                           </div>
                         )}
-                        <hr />
                         <div className="cart-summary">
                           <small>{cartProducts.length} Item(s) selected</small>
                           <h5>SUBTOTAL: ${total}</h5>

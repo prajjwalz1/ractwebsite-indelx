@@ -65,10 +65,10 @@ export default function ProductDetail({ product }) {
                     </div>
                     <div
                       className="imj"
-                      onClick={() => handleImageClick(product01)}
+                      onClick={() => handleImageClick(product.image)}
                     >
                       <Image
-                        src={product01}
+                        src={product.image}
                         alt={product.title}
                         width={153}
                         height={153}
@@ -76,10 +76,10 @@ export default function ProductDetail({ product }) {
                     </div>
                     <div
                       className="imj"
-                      onClick={() => handleImageClick(product07)}
+                      onClick={() => handleImageClick(product.image)}
                     >
                       <Image
-                        src={product07}
+                        src={product.image}
                         alt={product.title}
                         width={153}
                         height={153}
@@ -94,8 +94,8 @@ export default function ProductDetail({ product }) {
                           smallImage: {
                             alt: "",
                             src: (mainImage),
-                            width:450,
-                            height:450,
+                            width:462,
+                            height:490,
                           },
                           largeImage: {
                             src: (mainImage),
@@ -104,13 +104,6 @@ export default function ProductDetail({ product }) {
                           },
                         }}
                       />
-                      {/* <Image
-                        src={mainImage}
-                        alt={product.title}
-                        width={450}
-                        height={450}
-                        className="zoomed-image"
-                      /> */}
                     </div>
                   </div>
                 </div>

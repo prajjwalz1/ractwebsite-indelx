@@ -12,7 +12,6 @@ import "@/styles/productdetails.css";
 import "@/styles/topselling.css";
 import "@/styles/newsletter.css";
 
-
 import { CartContextProvider } from "../Context/CartContext";
 
 import Header from "../../components/Header";
@@ -21,27 +20,17 @@ import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import NewsLetter from "../../components/NewsLetter";
 
-export default function App({ Component, pageProps}) {
+export default function App({ Component, pageProps }) {
   return (
     <>
       <CartContextProvider>
         <TopHeader />
         <Header />
         <Navigation />
-        <Component {...pageProps}/>
-        <NewsLetter/>
+        <Component {...pageProps} />
+        <NewsLetter />
         <Footer />
       </CartContextProvider>
     </>
   );
 }
-// export async function getServerSideProps() {
-//   const res = await fetch("https://fakestoreapi.com/products");
-//   const products = await res.json();
-
-//   return {
-//     props: {
-//       products,
-//     },
-//   };
-// }

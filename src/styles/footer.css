@@ -6,6 +6,9 @@
     background: #1E1F29;
     align-items: center;
   }
+  .footer-row{
+    display: flex;
+  }
   .col-md-3 {
     flex: 1;
     margin: 0 0.625rem;
@@ -51,15 +54,33 @@
     font-size: 0.75rem;
     margin-bottom: 30px;
   }
-  
+  .footer-payments{
+    align-items: center;
+  }
+  .footer-payments ul li{
+    align-items: center;
+  }
   .footer-payments li {
     display: inline-block;
-    margin-right: 5px;
+    align-items: center;
+    margin-right: 1rem;
+    align-items: center;
   }
   
   .footer-payments li a {
     color: #15161D;
     font-size: 36px;
-    display: block;
+    align-items: center;
   }
-  
+  .b-footer{
+    align-items: center;
+  }
+ 
+  @media (max-width:600px ){
+    .footer-row{
+      display: flex;
+      flex-direction: column;
+    }
+   
+    
+   }
