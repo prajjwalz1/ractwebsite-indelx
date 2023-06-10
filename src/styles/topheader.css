@@ -78,11 +78,11 @@
   top: 100%;
   left: 0;
   z-index: 1;
-  background-color: #f1f1f1;
-  min-width: 50px;
+  background-color: #ffffff;
+  min-width: 3rem;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   padding: 0.75rem 16px;
-  border-radius: 0.9375rem;
+  border-radius: 0.6rem;
 }
 
 .dropdown:hover .dropdown-content {
@@ -90,6 +90,7 @@
 }
 
 .dropdown button {
+  color: #D10024;
   background-color: transparent;
   border: none;
   padding: 0;

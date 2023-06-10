@@ -17,6 +17,7 @@ a {
     color: #2B2D42;
     font-weight: 500;
     transition: 0.2s color;
+    text-decoration: none;
   }
   
 /* a:hover, a:focus {

@@ -13,10 +13,12 @@ import axios from "axios";
 import { CartContext } from "@/Context/CartContext";
 import Navigation from "./Navigation";
 import SearchBar from "./SearchBar";
+import { useSession, signIn } from "next-auth/react";
 
 const Header = () => {
   const [categories, setCategories] = useState([]);
-
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
 
   useEffect(() => {
     fetchCategories();
@@ -80,7 +82,7 @@ const Header = () => {
   // const addToCart = (product) => {
   //   setCartProducts((prevCartProducts) => [...prevCartProducts, product]);
   // };
-  
+
   return (
     <>
       <div className="header">
@@ -94,7 +96,7 @@ const Header = () => {
                   </Link>
                 </div>
               </div>
-              <SearchBar/>
+              <SearchBar />
 
               <div className="ctn-part">
                 <div className="header-ctn">
@@ -158,8 +160,9 @@ const Header = () => {
                                           (id) => id === product.id
                                         ).length
                                       }
-                                    </span>$
-                                    {product.price}
+                                      x
+                                    </span>
+                                    ${product.price}
                                   </h4>
                                 </div>
                               </div>
@@ -179,10 +182,18 @@ const Header = () => {
                           </Link>
                           <Link href="/checkout" onClick={handleCheckout}>
                             Checkout
-                            <i>
-                              <FaArrowCircleRight />
-                            </i>
                           </Link>
+                          {/* {session ? (
+                            <Link href="/checkout">
+                              <button className="primary-btn">
+                                PROCEED TO CHECKOUT
+                              </button>
+                            </Link>
+                          ) : (
+                            <button className="primary-btn" onClick={() => signIn()}>
+                              LOGIN TO CHECKOUT
+                            </button>
+                          )} */}
                         </div>
                       </div>
                     )}

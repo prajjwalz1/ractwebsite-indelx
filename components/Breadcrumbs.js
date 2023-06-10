@@ -1,18 +1,17 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
+import Link from "next/link";
 
-const Breadcrumbs = ({breadCrumbs}) => {
+const Breadcrumbs = ({ breadCrumbs }) => {
   return (
     <>
-    
-    <div id="breadcrumb" className="section">
-      <div className="container">
+      <div id="breadcrumb" className="section">
         <div className="row">
           <div className="col-md-12">
             <ul className="breadcrumb-tree">
-              {breadCrumbs.map((breadcrumb,index)=>(
-                <li><Link href={breadcrumb.url}>{breadcrumb.name}</Link></li>
-
+              {breadCrumbs.map((breadcrumb, index) => (
+                <li key={index}>
+                  <Link href={breadcrumb.url}>{breadcrumb.name}</Link>
+                </li>
               ))}
               {/* <li><Link href="/">Home</Link></li> */}
               {/* <li><Link href="/AllCategories">All Categories</Link></li> */}
@@ -23,10 +22,8 @@ const Breadcrumbs = ({breadCrumbs}) => {
           </div>
         </div>
       </div>
-    </div>
-  
     </>
-  )
-}
+  );
+};
 
-export default Breadcrumbs
+export default Breadcrumbs;

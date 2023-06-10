@@ -1,14 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaTrash, FaCheck, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import {
+  FaTrash,
+  FaCheck,
+  FaChevronDown,
+  FaChevronUp,
+  FaShoppingBag,
+} from "react-icons/fa";
 import Image from "next/image";
 import { CartContext } from "@/Context/CartContext";
 import axios from "axios";
 import Link from "next/link";
+import { useSession, signIn } from "next-auth/react";
 
-const CartDetails = () => {
+const CartDetails = (product) => {
   const { cartProducts, addProduct, removeProduct, deleteFromCart } =
     useContext(CartContext);
   const [products, setProducts] = useState([]);
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
+
   useEffect(() => {
     if (cartProducts.length > 0) {
       axios.post("/api/cart", { ids: cartProducts }).then((Response) => {
@@ -16,30 +26,40 @@ const CartDetails = () => {
       });
     }
   }, [cartProducts]);
+
   function increaseThisProduct(id) {
     addProduct(id);
   }
+
   function decreaseThisProduct(id) {
     removeProduct(id);
   }
+
+  const handleDelete = (id) => {
+    deleteFromCart(id);
+  };
+  
+
 
   let total = 0;
   for (const id of cartProducts) {
     const price = products.find((p) => p.id === id)?.price || 0;
     total += price;
   }
-  function deleteitemfromcart() {
-    deleteFromCart();
-  }
 
   return (
     <div className="container">
       {cartProducts.length === 0 ? (
-        <div>
-          <h3>Your Cart is Empty!</h3>
+        <div className="empty-cart">
+          <h4>Your Cart is Empty.</h4>
           <div className="keepshopping">
-            <Link href="/AllCategories">
-              <button className="con-shopping">Continue Shopping</button>
+            <Link href="/">
+              <button className="check-button">
+                <i>
+                  <FaShoppingBag />
+                </i>
+                Continue Shopping
+              </button>
             </Link>
           </div>
         </div>
@@ -58,7 +78,7 @@ const CartDetails = () => {
             </thead>
             <tbody>
               {products.map((product) => (
-                <tr>
+                <tr key={product.id} >
                   <td>
                     <div className="media">
                       <div className="d-flex">
@@ -113,7 +133,7 @@ const CartDetails = () => {
                   <td>
                     <div
                       className="itemdelete"
-                      onClick={() => deleteitemfromcart(product.id)}
+                      onClick={() => handleDelete(product.id)}
                     >
                       <FaTrash />
                     </div>
@@ -133,22 +153,37 @@ const CartDetails = () => {
             </tbody>
           </table>
           <hr className="h-line" />
-              <div className="check-container">
-                <div className="checkout">
-                  <Link href="/AllCategories">
-                    <button className="con-shopping">Continue Shopping</button>
-                  </Link>
-                </div>
-                <div className="check-out">
+          <div className="check-container">
+            <div className="checkout">
+              <Link href="/">
+                <button className="check-button">
+                  <i>
+                    <FaShoppingBag />
+                  </i>
+                  Continue Shopping
+                </button>
+              </Link>
+            </div>
+            <div className="check-out">
+              {session ? (
+                <Link href="/checkout">
                   <button className="check-button">
                     <i>
                       <FaCheck />
                     </i>
                     PROCEED TO CHECKOUT
                   </button>
-                </div>
-              </div>
-         
+                </Link>
+              ) : (
+                <button className="check-button" onClick={() => signIn()}>
+                  <i>
+                    <FaCheck />
+                  </i>
+                  LOGIN TO CHECKOUT
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       )}
     </div>

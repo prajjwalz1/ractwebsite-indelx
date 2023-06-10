@@ -94,6 +94,9 @@
     padding: 0px 30px 0px 50px;
     cursor: pointer;
   }
+  .check-button:active{
+    background-color: #e6e6e6;
+  }
   .check-button>i {
     position: absolute;
     left: 0;
@@ -117,24 +120,6 @@
   }
   .checkout{
     margin-left: 38rem;
-  }
-  .con-shopping{
-    height: 40px;
-    width: 12.5rem;
-    border-radius: 40px 40px 40px 40px;
-    border: none;
-    background-color: #ef233c;
-    color: #ffffff;
-    text-transform: uppercase;
-    font-weight: 700;
-    border-radius: 40px;
-    transition: 0.2s all;
-    cursor: pointer;
-    justify-content: flex-end;
-  }
-  .con-shopping:active{
-    background-color: #D10024;
-
   }
 
 .qty {
@@ -209,6 +194,12 @@ thead {
 .table td, .table th {
   padding: .75rem;
   border-top: 1px solid #dee2e6;
+}
+.empty-cart{
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  justify-content: space-between;
 }
   
 

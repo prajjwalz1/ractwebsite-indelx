@@ -11,6 +11,8 @@ import "@/styles/store.css";
 import "@/styles/productdetails.css";
 import "@/styles/topselling.css";
 import "@/styles/newsletter.css";
+import "@/styles/checkout.css";
+import { SessionProvider } from "next-auth/react";
 
 import { CartContextProvider } from "../Context/CartContext";
 
@@ -20,17 +22,19 @@ import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import NewsLetter from "../../components/NewsLetter";
 
-export default function App({ Component, pageProps }) {
+export default function App({ session,Component, pageProps }) {
   return (
     <>
-      <CartContextProvider>
-        <TopHeader />
-        <Header />
-        <Navigation />
-        <Component {...pageProps} />
-        <NewsLetter />
-        <Footer />
-      </CartContextProvider>
+      <SessionProvider session={session}>
+        <CartContextProvider>
+          <TopHeader />
+          <Header />
+          <Navigation />
+          <Component {...pageProps} />
+          <NewsLetter />
+          <Footer />
+        </CartContextProvider>
+      </SessionProvider>
     </>
   );
 }

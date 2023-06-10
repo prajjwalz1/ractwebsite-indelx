@@ -1,13 +1,13 @@
-import React from 'react'
-import CartDetails from '../../components/CartDetail'
+import React from "react";
+import CartDetails from "../../components/CartDetail";
 
-const cartdetail = () => {
+const cartdetail = ({ product }) => {
   return (
     <>
-    <CartDetails/>
-
+      <CartDetails />
     </>
-  )
-}
+  );
+};
+
 
 export default cartdetail;

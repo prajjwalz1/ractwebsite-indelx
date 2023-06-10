@@ -1,9 +1,9 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 
-export default async function handle(req, res,) {
+export default async function handle(req, res) {
   try {
-    const response = await fetch('https://fakestoreapi.com/products');
-    const products = await response.json();
+    const response = await axios.get('https://fakestoreapi.com/products');
+    const products = response.data;
     const ids = req.body.ids;
     const filteredProducts = products.filter(product => ids.includes(product.id));
     res.json(filteredProducts);

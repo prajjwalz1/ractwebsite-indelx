@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import {
   FaStar,
@@ -9,7 +9,6 @@ import {
 } from "react-icons/fa";
 import { CartContext } from "../src/Context/CartContext";
 import Image from "next/image";
-
 
 const SearchResults = () => {
   const router = useRouter();
@@ -37,7 +36,9 @@ const SearchResults = () => {
         });
     }
   }, [q]);
+
   const { addProduct } = useContext(CartContext);
+
   function addToCart(productId) {
     addProduct(productId);
   }
@@ -48,7 +49,7 @@ const SearchResults = () => {
         <div>Loading...</div>
       ) : (
         <>
-          <h2>Search Results for "{searchQuery}"</h2>
+          <h2>Search Results for &quot;{searchQuery}&quot;</h2>
           {searchResults.length > 0 ? (
             <ul>
               {searchResults.map((result) => (
@@ -114,7 +115,10 @@ const SearchResults = () => {
                       </div>
                     </div>
                     <div className="add-to-cart">
-                      <button onClick={() => addToCart(result.id)} className="add-to-cart-btn">
+                      <button
+                        onClick={() => addToCart(result.id)}
+                        className="add-to-cart-btn"
+                      >
                         <i>
                           <FaShoppingCart />
                         </i>
