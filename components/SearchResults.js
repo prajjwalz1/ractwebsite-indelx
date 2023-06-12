@@ -21,11 +21,11 @@ const SearchResults = () => {
     if (q) {
       const query = decodeURIComponent(q);
       setSearchQuery(query);
-      fetch(`https://fakestoreapi.com/products`)
+      fetch(`https://www.getfromnepal.com/productapi`)
         .then((response) => response.json())
         .then((data) => {
           const filteredResults = data.filter((product) =>
-            product.title.toLowerCase().includes(query.toLowerCase())
+            product.pname.toLowerCase().includes(query.toLowerCase())
           );
           setSearchResults(filteredResults);
           setLoading(false);
@@ -57,8 +57,8 @@ const SearchResults = () => {
                   <div className="product">
                     <div className="product-img">
                       <Image
-                        src={result.image}
-                        alt={result.title}
+                        src={`https://www.getfromnepal.com/${result.image}`}
+                        alt={result.pname}
                         width={262}
                         height={262}
                       />
@@ -70,10 +70,10 @@ const SearchResults = () => {
                     <div className="product-body">
                       <p className="product-category">{result.category}</p>
                       <h3 className="product-name">
-                        <a href="#">{result.title}</a>
+                        <a href="#">{result.pname}</a>
                       </h3>
                       <h4 className="product-price">
-                        {result.price}{" "}
+                        {result.selling_price}
                         <del className="product-old-price">$990.00</del>
                       </h4>
                       <div className="product-rating">

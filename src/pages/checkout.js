@@ -8,10 +8,7 @@ import querystring from "querystring";
 
 import axios from "axios";
 
-
-
 const Checkout = () => {
-
   const router = useRouter();
   const { cartProducts } = useContext(CartContext);
   const [products, setProducts] = useState([]);
@@ -26,8 +23,8 @@ const Checkout = () => {
   let total = 0;
   const shippingCost = 10;
   for (const id of cartProducts) {
-    const price = products.find((p) => p.id === id)?.price || 0;
-    total += price;
+    const selling_price = products.find((p) => p.id === id)?.selling_price || 0;
+    total += selling_price;
   }
   total += shippingCost;
 
@@ -67,7 +64,7 @@ const Checkout = () => {
       } else if (selectedPayment === "esewa") {
         const queryParams = querystring.stringify({ totalAmount: total });
         router.push(`/esewa?${queryParams}`);
-      }else if (selectedPayment === "mastercard") {
+      } else if (selectedPayment === "mastercard") {
         const queryParams = querystring.stringify({ totalAmount: total });
         router.push(`/mastercard?${queryParams}`);
       }
@@ -298,11 +295,11 @@ const Checkout = () => {
                 <div className="order-col" key={index}>
                   <div>
                     {cartProducts.filter((id) => id === product.id).length}x
-                    {product.title}
+                    {product.pname}
                   </div>
                   <div>
                     $
-                    {product.price *
+                    {product.selling_price *
                       cartProducts.filter((id) => id === product.id).length}
                   </div>
                 </div>
@@ -386,7 +383,8 @@ const Checkout = () => {
               {selectedPayment === "paypal" && (
                 <div className="caption">
                   <p>
-                  Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.
+                    Pay via PayPal, you can pay with your credit card if you
+                    don&apos;t have a PayPal account.
                   </p>
                 </div>
               )}
@@ -431,7 +429,7 @@ const Checkout = () => {
             />
             <label htmlFor="terms">
               <span></span>
-              I've read and accept the{" "}
+              I&apos;ve read and accept the{" "}
               <Link className="tandconditions" href="/TermsConditions">
                 terms &amp; conditions
               </Link>
@@ -442,7 +440,6 @@ const Checkout = () => {
               !isTermsChecked || !selectedPayment ? "disabled" : ""
             }`}
             onClick={handlePlaceOrder}
-            
           >
             Place order
           </button>

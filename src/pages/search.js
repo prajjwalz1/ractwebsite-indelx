@@ -15,7 +15,7 @@ const SearchPage = () => {
 
   const handleSearch = async (searchQuery) => {
     try {
-      const response = await fetch('https://fakestoreapi.com/products');
+      const response = await fetch('https://www.getfromnepal.com/productapi');
       const data = await response.json();
       
       const filteredResults = data.filter((product) =>

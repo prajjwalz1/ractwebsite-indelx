@@ -61,8 +61,8 @@ const TopSelling = ({ products }) => {
             <div className="product-widget" key={product.id}>
               <div className="product--img">
                 <Image
-                  src={product.image}
-                  alt={product.title}
+                  src={`https://www.getfromnepal.com/${product.image}`}
+                  alt={product.pname}
                   width={60}
                   height={60}
                 />
@@ -71,12 +71,12 @@ const TopSelling = ({ products }) => {
                 <p className="product-category">{product.category}</p>
                 <h3 className="product-name">
                   <Link href={`/product/${product.id}`} tabIndex="-1">
-                    {product.title}
+                    {product.pname}
                   </Link>
                 </h3>
                 <h4 className="product-price">
-                  {product.price}
-                  <del className="product-old-price">$990.00</del>
+                  ${product.selling_price}
+                  <del className="product-old-price">{product.discounted_price}</del>
                 </h4>
               </div>
             </div>

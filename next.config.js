@@ -7,6 +7,6 @@ module.exports = nextConfig;
 
 module.exports = {
   images: {
-    domains: ["fakestoreapi.com"],
+    domains: ['www.getfromnepal.com'],
   },
 };

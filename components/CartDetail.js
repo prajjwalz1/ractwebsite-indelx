@@ -12,7 +12,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
 
-const CartDetails = (product) => {
+const CartDetails = ({product}) => {
   const { cartProducts, addProduct, removeProduct, deleteFromCart } =
     useContext(CartContext);
   const [products, setProducts] = useState([]);
@@ -35,16 +35,16 @@ const CartDetails = (product) => {
     removeProduct(id);
   }
 
-  const handleDelete = (id) => {
-    deleteFromCart(id);
+  const handleDelete = () => {
+    deleteFromCart();
   };
   
 
 
   let total = 0;
   for (const id of cartProducts) {
-    const price = products.find((p) => p.id === id)?.price || 0;
-    total += price;
+    const selling_price = products.find((p) => p.id === id)?.selling_price || 0;
+    total += selling_price;
   }
 
   return (
@@ -83,19 +83,19 @@ const CartDetails = (product) => {
                     <div className="media">
                       <div className="d-flex">
                         <Image
-                          src={product.image}
-                          alt=""
+                          src={`https://www.getfromnepal.com/${product.image}`}
+                          alt={product.pname}
                           width={100}
                           height={100}
                         />
                       </div>
                       <div className="media-body">
-                        <p>{product.title}</p>
+                        <p>{product.pname}</p>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <h5>${product.price}</h5>
+                    <h5>${product.selling_price}</h5>
                   </td>
                   <td>
                     <div className="input-number">
@@ -126,7 +126,7 @@ const CartDetails = (product) => {
                   <td>
                     <div className="itemtoatal">
                       $
-                      {product.price *
+                      {product.selling_price *
                         cartProducts.filter((id) => id === product.id).length}
                     </div>
                   </td>

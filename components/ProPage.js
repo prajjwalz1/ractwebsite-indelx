@@ -10,34 +10,36 @@ import {
 } from "react-icons/fa";
 import { CartContext } from "../src/Context/CartContext";
 
-const ProPage = ({ product }) => {
+const ProPage = ({ product}) => {
+
   const { addProduct } = useContext(CartContext);
   function addToCart() {
     addProduct(product.id);
   }
+
 
   return (
     <>
       <div className="product">
         <div className="product-img">
           <Image
-            src={product.image}
-            alt={product.title}
+            src={`https://www.getfromnepal.com/${product.image}`}
+            alt={product.pname}
             width={225}
             height={225}
           />
         </div>
 
         <div className="product-body">
-          <p className="product-category">{product.category}</p>
+          <p className="product-category">{product.category_name}</p>
           <h3 className="product-name">
             <Link href={`/product/${product.id}`} tabindex="-1">
-              {product.title}
+              {product.pname}
             </Link>
           </h3>
           <h4 className="product-price">
-            {product.price}
-            <del className="product-old-price">{product.price}</del>
+            {product.selling_price}
+            <del className="product-old-price">{product.discounted_price}</del>
           </h4>
           <div className="product-rating">
             <Rating rate={product.rating} />

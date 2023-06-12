@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-const esewa = () => {
+const Esewa = () => {
   useEffect(() => {
     const path = "https://uat.esewa.com.np/epay/main";
     const params = {
       amt: 100,
       psc: 0,
       pdc: 0,
-      txAmt: 0,
-      tAmt: 100,
-      pid: "ee2c3ca1-696b-4cc5-a6be-2c40d929d453",
+      txAmt: 1,
+      tAmt: 101,
+      pid: "ee2c3ca1-696b-4cc5-a6be-2chndha",
       scd: "EPAYTEST",
-      su: "http://merchant.com.np/page/esewa_payment_success",
+      su: "http://localhost:3000/success",
       fu: "http://localhost:3000/checkout",
     };
 
@@ -38,4 +38,4 @@ const esewa = () => {
   return null;
 };
 
-export default esewa;
+export default Esewa;

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
@@ -7,45 +8,50 @@ const SearchBar = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("0");
   const [categories, setCategories] = useState([]);
-
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [selectedSuggestion, setSelectedSuggestion] = useState(null);
 
   const [error, setError] = useState(null);
   const inputRef = useRef(null);
   const containerRef = useRef(null);
   const router = useRouter();
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "https://fakestoreapi.com/products/categories"
+        "https://www.getfromnepal.com/productapi"
       );
-      setCategories(response.data);
+      setCategories(response.data.map((product) => product.category_name));
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
   };
 
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
     setSearchText(inputValue);
 
-    fetch(
-      `https://fakestoreapi.com/products?title=${encodeURIComponent(
-        inputValue
-      )}`
-    )
+    const categoryParam =
+      selectedCategory === "0"
+        ? ""
+        : `category=${encodeURIComponent(selectedCategory)}&`;
+    const url = `https://www.getfromnepal.com/productapi?${categoryParam}pname=${encodeURIComponent(
+      inputValue
+    )}`;
+
+    fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        const filteredTitles = data.filter((product) =>
-          product.title.toLowerCase().includes(inputValue.toLowerCase())
+        const filteredProducts = data.filter((product) =>
+          product.pname.toLowerCase().includes(inputValue.toLowerCase())
         );
 
-        const limitedTitles = filteredTitles.slice(0, 10);
+        const limitedProducts = filteredProducts.slice(0, 10);
 
-        const productTitles = limitedTitles.map((product) => product.title);
+        const productTitles = limitedProducts.map((product) => product.pname);
         setSuggestions(productTitles);
         setShowSuggestions(true);
         setError(null);
@@ -91,6 +97,9 @@ const SearchBar = () => {
   };
 
   const handleSearch = () => {
+    if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
+      setSearchText(suggestions[highlightedIndex]);
+    }
     if (searchText.trim() !== "") {
       router.push(`/search?q=${encodeURIComponent(searchText)}`);
     }
@@ -103,6 +112,20 @@ const SearchBar = () => {
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSearch();
+    } else if (event.key === "ArrowDown") {
+      event.preventDefault();
+      if (selectedSuggestion === null) {
+        setSelectedSuggestion(0);
+      } else if (selectedSuggestion < suggestions.length - 1) {
+        setSelectedSuggestion((prevIndex) => prevIndex + 1);
+      }
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      if (selectedSuggestion > 0) {
+        setSelectedSuggestion((prevIndex) => prevIndex - 1);
+      } else if (selectedSuggestion === 0) {
+        setSelectedSuggestion(null);
+      }
     }
   };
 
@@ -110,18 +133,18 @@ const SearchBar = () => {
     <div className="search-part">
       <div className="header-search">
         <div className="search-bar">
-        <select
-          className="input-select"
-          value={selectedCategory}
-          onChange={handleCategoryChange}
-        >
-          <option value="0">All Categories</option>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
+          <select
+            className="input-select"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+          >
+            <option value="0">All Categories</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
           <input
             type="text"
             className="input"
@@ -132,7 +155,9 @@ const SearchBar = () => {
             ref={inputRef}
             onClick={toggleSuggestions}
           />
-          <button className="search-btn" onClick={handleSearch}>Search</button>
+          <button className="search-btn" onClick={handleSearch}>
+            Search
+          </button>
           {showSuggestions && (
             <div className="suggestions-container" ref={containerRef}>
               {suggestions.length > 0 ? (
@@ -141,7 +166,9 @@ const SearchBar = () => {
                     <li
                       key={index}
                       onClick={() => handleSuggestionClick(suggestion)}
-                      className="suggestion-item"
+                      className={`suggestion-item ${
+                        index === selectedSuggestion ? "selected" : ""
+                      }`}
                     >
                       {suggestion}
                     </li>
@@ -157,7 +184,7 @@ const SearchBar = () => {
           <style jsx>{`
             .search-bar {
               position: relative;
-              height:100%;
+              height: 100%;
             }
 
             .suggestions-container {
@@ -170,7 +197,7 @@ const SearchBar = () => {
               padding: 8px;
               overflow: hidden;
               width: 19.9rem;
-              z-index:999;
+              z-index: 999;
             }
 
             .no-suggestions {

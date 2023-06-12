@@ -17,9 +17,9 @@ export {
   product08,
   product09,
 };
-export const email = "gsmahato8@gmail.com";
-export const phoneNumber = "9844101543";
-export const location = "Sanepa-2, Lalitpur";
+export const email = "email@gmail.com";
+export const phoneNumber = "981000000";
+export const location = "Kathmandu ,Nepal";
 
 export const sitedetails = [
   {

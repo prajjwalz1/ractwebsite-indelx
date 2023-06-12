@@ -16,7 +16,7 @@ import {
 import Breadcrumbs from "./Breadcrumbs";
 import { CartContext } from "../src/Context/CartContext";
 
-const Store = ({ products, categories }) => {
+const Store = ({ products, categories,brands }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 10000]);
@@ -50,11 +50,11 @@ const Store = ({ products, categories }) => {
     .filter((product) => {
       const isInSelectedCategories =
         selectedCategories.length === 0 ||
-        selectedCategories.includes(product.category);
+        selectedCategories.includes(product.category_name);
       const isInSelectedBrands =
         selectedBrands.length === 0 || selectedBrands.includes(product.brand);
       const isInRange =
-        product.price >= priceRange[0] && product.price <= priceRange[1];
+        product.selling_price >= priceRange[0] && product.selling_price <= priceRange[1];
       return isInSelectedCategories && isInSelectedBrands && isInRange;
     })
     .sort((a, b) => {
@@ -72,8 +72,8 @@ const Store = ({ products, categories }) => {
     currentPage * perPage
   );
 
-  const getCategoryProductCount = (category) => {
-    return products.filter((product) => product.category === category).length;
+  const getCategoryProductCount = (category_name) => {
+    return products.filter((product) => product.category_name === category_name).length;
   };
 
   const getBrandProductCount = (brand) => {
@@ -94,15 +94,15 @@ const Store = ({ products, categories }) => {
             <div className="left-side">
               <div className="aside">
                 <h3 className="aside-title">Categories</h3>
-                {categories.map((category) => (
-                  <div className="checkbox-filter" key={category.id}>
+                {categories.map((category_name) => (
+                  <div className="checkbox-filter" key={category_name.id}>
                     <label>
                       <input
                         type="checkbox"
-                        checked={selectedCategories.includes(category)}
-                        onChange={() => handleCategoryChange(category)}
+                        checked={selectedCategories.includes(category_name)}
+                        onChange={() => handleCategoryChange(category_name)}
                       />
-                      {category} ({getCategoryProductCount(category)})
+                      {category_name} ({getCategoryProductCount(category_name)})
                     </label>
                   </div>
                 ))}
@@ -152,7 +152,7 @@ const Store = ({ products, categories }) => {
                     valueLabelDisplay="auto"
                     max={
                       products.length > 0
-                        ? Math.max(...products.map((product) => product.price))
+                        ? Math.max(...products.map((product) => product.selling_price))
                         : 0
                     }
                   />
@@ -160,7 +160,7 @@ const Store = ({ products, categories }) => {
               </div>
               <div className="aside">
                 <h3 className="aside-title">Brand</h3>
-                {categories.map((brand) => (
+                {brands.map((brand) => (
                   <div className="checkbox-filter" key={brand.id}>
                     <label>
                       <input
@@ -180,22 +180,22 @@ const Store = ({ products, categories }) => {
                     <div className="product-widget" key={product.id}>
                       <div className="product--img">
                         <Image
-                          src={product.image}
-                          alt={product.title}
+                          src={`https://www.getfromnepal.com/${product.image}`}
+                          alt={product.pname}
                           width={60}
                           height={60}
                         />
                       </div>
                       <div className="product-body">
-                        <p className="product-category">{product.category}</p>
+                        <p className="product-category">{product.category_name}</p>
                         <h3 className="product-name">
                           <Link href={`/product/${product.id}`} tabIndex="-1">
-                            {product.title}
+                            {product.pname}
                           </Link>
                         </h3>
                         <h4 className="product-price">
-                          {product.price}
-                          <del className="product-old-price">$990.00</del>
+                          {product.selling_price}
+                          <del className="product-old-price">${product.discounted_price}</del>
                         </h4>
                       </div>
                     </div>
@@ -204,7 +204,7 @@ const Store = ({ products, categories }) => {
               </div>
             </div>
             <div className="right-side">
-              <div className="store-filter clearfix">
+              <div className="store-filter">
                 <div className="store-sort">
                   <label>
                     Sort By:
@@ -251,22 +251,22 @@ const Store = ({ products, categories }) => {
                     <div className="product">
                       <div className="product-img">
                         <Image
-                          src={product.image}
-                          alt={product.title}
+                          src={`https://www.getfromnepal.com/${product.image}`}
+                          alt={product.pname}
                           width={262}
                           height={262}
                         />
                       </div>
                       <div className="product-body">
-                        <p className="product-category">{product.category}</p>
+                        <p className="product-category">{product.category_name}</p>
                         <h3 className="product-name">
                           <Link href={`/product/${product.id}`} tabindex="-1">
-                            {product.title}
+                            {product.pname}
                           </Link>
                         </h3>
                         <h4 className="product-price">
-                          {product.price}
-                          <del className="product-old-price">$990.00</del>
+                          {product.selling_price}
+                          <del className="product-old-price">${}</del>
                         </h4>
                         <div className="product-rating">
                           <i>

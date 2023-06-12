@@ -39,10 +39,15 @@
     display: flex;
     position: relative;
     align-items: center;
+   
+
     }
     
     .product-img>img {
-    margin-left: 1rem;
+    margin-left: 1.1rem;
+    margin-top: 1rem;
+    width: 225px;
+    height: 225px;
     }
     
     .product .product-body {

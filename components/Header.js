@@ -27,7 +27,7 @@ const Header = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "https://fakestoreapi.com/products/categories"
+        "https://www.getfromnepal.com/productapi"
       );
       setCategories(response.data);
     } catch (error) {
@@ -75,8 +75,8 @@ const Header = () => {
 
   let total = 0;
   for (const id of cartProducts) {
-    const price = products.find((p) => p.id === id)?.price || 0;
-    total += price;
+    const selling_price = products.find((p) => p.id === id)?.selling_price || 0;
+    total += selling_price;
   }
 
   // const addToCart = (product) => {
@@ -143,15 +143,15 @@ const Header = () => {
                                 </div>
                                 <div className="product_img">
                                   <Image
-                                    src={product.image}
-                                    alt={product.title}
+                                    src={`https://www.getfromnepal.com/${product.image}`}
+                                    alt={product.pname}
                                     width={100}
                                     height={100}
                                   />
                                 </div>
                                 <div className="product_body">
                                   <h5 className="product_name">
-                                    {product.title}
+                                    {product.pname}
                                   </h5>
                                   <h4 className="product_price">
                                     <span className="qnty">
@@ -162,7 +162,7 @@ const Header = () => {
                                       }
                                       x
                                     </span>
-                                    ${product.price}
+                                    ${product.selling_price}
                                   </h4>
                                 </div>
                               </div>

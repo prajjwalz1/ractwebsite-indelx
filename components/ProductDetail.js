@@ -22,7 +22,8 @@ import { CartContext } from "../src/Context/CartContext";
 import Breadcrumbs from "./Breadcrumbs";
 
 export default function ProductDetail({ product }) {
-  const [mainImage, setMainImage] = useState(product.image);
+  console.log(product)
+  const [mainImage, setMainImage] = useState(`https://www.getfromnepal.com/${product.image}`);
 
   const handleImageClick = (imageSrc) => {
     setMainImage(imageSrc);
@@ -40,7 +41,7 @@ export default function ProductDetail({ product }) {
   }
   const breadCrumbs=[
     {name:"Home",url:'/'},
-    {name: `${product.title}...`,url:`/product/${product.id}`},
+    {name: `${product.pname}...`,url:`/product/${product.id}`},
   ]
   return (
     <>
@@ -54,33 +55,33 @@ export default function ProductDetail({ product }) {
                   <div className="small-images">
                     <div
                       className="imj"
-                      onClick={() => handleImageClick(product.image)}
+                      onClick={() => handleImageClick(`https://www.getfromnepal.com/${product.image_3}`)}
                     >
                       <Image
-                        src={product.image}
-                        alt={product.title}
+                        src={`https://www.getfromnepal.com/${product.image_3}`}
+                        alt={product.pname}
                         width={153}
                         height={153}
                       />
                     </div>
                     <div
                       className="imj"
-                      onClick={() => handleImageClick(product.image)}
+                      onClick={() => handleImageClick(`https://www.getfromnepal.com/${product.image}`)}
                     >
                       <Image
-                        src={product.image}
-                        alt={product.title}
+                        src={`https://www.getfromnepal.com/${product.image}`}
+                        alt={product.pname}
                         width={153}
                         height={153}
                       />
                     </div>
                     <div
                       className="imj"
-                      onClick={() => handleImageClick(product.image)}
+                      onClick={() => handleImageClick(`https://www.getfromnepal.com/${product.image_2}`)}
                     >
                       <Image
-                        src={product.image}
-                        alt={product.title}
+                        src={`https://www.getfromnepal.com/${product.image_2}`}
+                        alt={product.pname}
                         width={153}
                         height={153}
                       />
@@ -110,7 +111,7 @@ export default function ProductDetail({ product }) {
 
                 <div className="product-detail-part">
                   <div className="product-Details">
-                    <h2 className="product-name">{product.title}</h2>
+                    <h2 className="product-name">{product.pname}</h2>
                     <div className="Rating">
                       <div className="p-Rating">
                         <i>
@@ -135,8 +136,8 @@ export default function ProductDetail({ product }) {
                     </div>
                     <div>
                       <h3 className="product-price">
-                        {`$${product.price}`}
-                        <del className="productOldPrice">$990.00</del>
+                        {`$${product.selling_price}`}
+                        <del className="productOldPrice">${product.discounted_price}</del>
                       </h3>
                       <span className="productAvailable">In Stock</span>
                     </div>

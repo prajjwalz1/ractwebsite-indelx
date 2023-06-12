@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default async function handle(req, res) {
   try {
-    const response = await axios.get('https://fakestoreapi.com/products');
+    const response = await axios.get('https://www.getfromnepal.com/productapi');
     const products = response.data;
     const ids = req.body.ids;
     const filteredProducts = products.filter(product => ids.includes(product.id));
